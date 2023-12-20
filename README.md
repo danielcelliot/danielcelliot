@@ -27,6 +27,8 @@ An inventory management application, designed for E-Commerce and Point-of-Sale s
 
 [Source code](/caribay-management/)
 
+---
+
 ### Amazon Shopping Bot
 
 A command-line shopping bot that monitors the availabilty of specific low-supply items sold at online retailers and automatically purchase them as soon as they are in stock. Built using:
@@ -42,6 +44,8 @@ A command-line shopping bot that monitors the availabilty of specific low-supply
 
 A Microsoft Access application created to handle scheduling and reservations of ICT labs by staff members at UTT. [Source code](/ict-lab-scheduler/)
 
+---
+
 ### Supreme Cutz
 
 A web application designed for a local barbershop, that handles customer appointments and sells hair care products. Built using:
@@ -54,6 +58,8 @@ A web application designed for a local barbershop, that handles customer appoint
 
 [Source code](/supreme-cutz/)
 
+---
+
 ### Premier Care
 
 A native Windows CRUD application designed for a local clinic, that handles patient records, appointments, treatment, prescriptions and invoicing. Built using:
@@ -62,6 +68,8 @@ A native Windows CRUD application designed for a local clinic, that handles pati
 - Microsoft SQL Server.
 
 [Source code](/premier-care/)
+
+---
 
 ### AutoServe
 
@@ -74,6 +82,8 @@ A web application designed for a local auto-mechanic business. Featuring an admi
 - MySQL.
 
 [Source code](/autoserve/)
+
+---
 
 ### About Me
 
