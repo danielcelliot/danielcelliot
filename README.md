@@ -24,7 +24,7 @@ Built using:
 - Quarkus
 - Svelte
 - TailwindCSS
-- MariaDB.
+- MariaDB
 
 ### Amazon Shopping Bot
 
@@ -32,7 +32,7 @@ A command-line shopping bot that monitors the availabilty of specific low-supply
 Built using:
 
 - .NET Framework
-- Selenium.
+- Selenium
 
 ---
 
@@ -51,7 +51,7 @@ Built using:
 - JavaServer Pages
 - CSS
 - Javascript
-- MySQL.
+- MySQL
 
 ### Premier Care
 
@@ -63,14 +63,14 @@ Built using:
 
 ### AutoServe
 
-A web application designed for a local auto-mechanic business. Featuring an administrative panel where staff can assign jobs to mechanics, view that status of jobs and prepare invoicing. [Source code](/autoserve/)<br>
+A web application designed for a local auto-mechanic business. Featuring an administrative panel where staff can assign jobs to mechanics, view the status of jobs and prepare invoicing. [Source code](/autoserve/)<br>
 Built using:
 
 - Apache Tomcat
 - JavaServer Pages
 - Bootstrap CSS
 - Javascript
-- MySQL.
+- MySQL
 
 ### About Me
 
@@ -79,4 +79,4 @@ Built using:
 
 - HTML
 - CSS3
-- vanilla Javascript.
+- vanilla Javascript
