@@ -16,5 +16,5 @@ Timeframe: 3 days
 
 Technologies used:
 
-- [`.NET Framework`](https://dotnet.microsoft.com/en-us/) (C#)
+- [.NET Framework](https://dotnet.microsoft.com/en-us/) (C#)
 - [Selenium](https://www.selenium.dev/)
