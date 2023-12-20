@@ -20,7 +20,8 @@ A WIP E-commerce platform, built using modern open-source technologies and Jamst
 
 ### Caribay Management
 
-An inventory management application, designed for E-Commerce and Point-of-Sale systems. Built using:
+An inventory management application, designed for E-Commerce and Point-of-Sale systems.<br>
+Built using:
 
 - Quarkus
 - Svelte
@@ -31,7 +32,8 @@ An inventory management application, designed for E-Commerce and Point-of-Sale s
 
 ### Amazon Shopping Bot
 
-A command-line shopping bot that monitors the availabilty of specific low-supply items sold at online retailers and automatically purchase them as soon as they are in stock. Built using:
+A command-line shopping bot that monitors the availabilty of specific low-supply items sold at online retailers and automatically purchase them as soon as they are in stock.<br>
+Built using:
 
 - .NET Framework
 - Selenium.
@@ -48,7 +50,8 @@ A Microsoft Access application created to handle scheduling and reservations of 
 
 ### Supreme Cutz
 
-A web application designed for a local barbershop, that handles customer appointments and sells hair care products. Built using:
+A web application designed for a local barbershop, that handles customer appointments and sells hair care products.<br>
+Built using:
 
 - Apache Tomcat
 - JavaServer Pages
@@ -60,16 +63,18 @@ A web application designed for a local barbershop, that handles customer appoint
 
 ### Premier Care
 
-A native Windows CRUD application designed for a local clinic, that handles patient records, appointments, treatment, prescriptions and invoicing. Built using:
+A native Windows CRUD application designed for a local clinic, that handles patient records, appointments, treatment, prescriptions and invoicing.<br>
+Built using:
 
 - .NET Framework with Windows Forms
-- Microsoft SQL Server.
+- Microsoft SQL Server
 
 [Source code](/premier-care/)
 
 ### AutoServe
 
-A web application designed for a local auto-mechanic business. Featuring an administrative panel where staff can assign jobs to mechanics, view that status of jobs and prepare invoicing. Built using:
+A web application designed for a local auto-mechanic business. Featuring an administrative panel where staff can assign jobs to mechanics, view that status of jobs and prepare invoicing.<br>
+Built using:
 
 - Apache Tomcat
 - JavaServer Pages
@@ -81,7 +86,8 @@ A web application designed for a local auto-mechanic business. Featuring an admi
 
 ### About Me
 
-A personal portfolio website, with a focus on a visually appealing design and clear visual hierarchy. Built using:
+A personal portfolio website, with a focus on a visually appealing design and clear visual hierarchy.<br>
+Built using:
 
 - HTML
 - CSS3
