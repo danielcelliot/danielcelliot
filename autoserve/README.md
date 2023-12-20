@@ -12,11 +12,11 @@ Timeframe: 8 weeks
 Technologies used:
 Backend:
 
-- [`Java EE`](https://www.oracle.com/java/technologies/java-ee-glance.html) (Apache Tomcat)
+- [Java EE](https://www.oracle.com/java/technologies/java-ee-glance.html) (Apache Tomcat)
 - [MySQL](https://www.mysql.com/) database
 
 Frontend:
 
-- [`JavaServer Pages`](https://www.oracle.com/java/technologies/jspt.html)
-- [`Bootstrap CSS`](https://getbootstrap.com/)
+- [JavaServer Pages](https://www.oracle.com/java/technologies/jspt.html)
+- [Bootstrap CSS](https://getbootstrap.com/)
 - Vanilla Javascript

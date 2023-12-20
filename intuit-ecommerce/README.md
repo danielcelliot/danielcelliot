@@ -6,7 +6,7 @@ Technologies used:
 Backend:
 
 - Mutiple containerized (Docker) open-source services
-- Amazon [`AWS RDS Postgresql`](https://aws.amazon.com/rds/) database
+- Amazon [AWS RDS Postgresql](https://aws.amazon.com/rds/) database
 
 Frontend:
 

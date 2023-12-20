@@ -14,5 +14,5 @@ Timeframe: 8 weeks
 
 Technologies used:
 
-- [`.NET Framework`](https://dotnet.microsoft.com/en-us/) (C# and Windows Forms)
-- [`Microsoft SQL Server`](https://www.microsoft.com/en-us/sql-server/sql-server-2017)
+- [.NET Framework](https://dotnet.microsoft.com/en-us/) (C# and Windows Forms)
+- [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-2017)

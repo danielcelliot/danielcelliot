@@ -22,5 +22,5 @@ Timeframe: 8 weeks
 
 Technologies used:
 
-- [`Microsoft Access`](https://www.microsoft.com/en-us/microsoft-365/access)
-- [`Visual Basic for Applications`](https://en.wikipedia.org/wiki/Visual_Basic_for_Applications)
+- [Microsoft Access](https://www.microsoft.com/en-us/microsoft-365/access)
+- [Visual Basic for Applications](https://en.wikipedia.org/wiki/Visual_Basic_for_Applications)
