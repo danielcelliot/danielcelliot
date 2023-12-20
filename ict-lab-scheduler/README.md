@@ -18,7 +18,9 @@ The following were taken into consideration:
 
 Based on the requirements of the business, cost and time-constraints, a database built using Microsoft Access, posed to be best suited.
 
-Timeframe: 8 weeks
+Timeframe:
+
+- 8 weeks
 
 Technologies used:
 

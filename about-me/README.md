@@ -4,7 +4,9 @@ This website was an assignment for a User Interface Design course that I took, a
 
 CSS Grid gained widespread browser adoption around 2017 and for this course (2018) I was excited to try and build something interesting with it, but with a modern design that would not look out-of-place on a real portfolio website, for example. This was also my first timme using CSS @keyframe animations as well.
 
-Timeframe: 2 weeks
+Timeframe:
+
+- 2 weeks
 
 Technologies used:
 

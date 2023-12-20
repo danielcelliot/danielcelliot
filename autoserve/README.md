@@ -7,16 +7,14 @@ This website was a semester project for a Distributed Systems Progamming course 
 - Staff should be able to register new customers and their vehicles, create jobs and assign a mechanic to be principally responsible for a job. Each job should have an associated invoice detailing what was done and the cost.
 - Offer basic auto accessories for sale. These items should also be advertised along with their prices on the website. Purchases however are made at the garage.
 
-Timeframe: 8 weeks
+Timeframe:
+
+- 8 weeks
 
 Technologies used:
-Backend:
 
 - [Java EE](https://www.oracle.com/java/technologies/java-ee-glance.html) (Apache Tomcat)
 - [MySQL](https://www.mysql.com/) database
-
-Frontend:
-
 - [JavaServer Pages](https://www.oracle.com/java/technologies/jspt.html)
 - [Bootstrap CSS](https://getbootstrap.com/)
 - Vanilla Javascript

@@ -10,7 +10,9 @@ This application was a group semester project for a Business Programming course 
 - The system will also need to track a patient’s treatment and it should be capable of calculating the cost of treatment In order to provide itemized billing.
 - A billing invoice will be generated every visit for the services a customer has used. It provides a detailed list of all services used during the visit
 
-Timeframe: 8 weeks
+Timeframe:
+
+- 8 weeks
 
 Technologies used:
 

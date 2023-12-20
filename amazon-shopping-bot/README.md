@@ -12,7 +12,9 @@ Using a command-line interface, you enter your account credentials (Amazon, Newe
 
 Using the bot, I was able to purchase 2 additional PlayStation 5's through amazon. Considering their high demand, low supply and what customers were willing to pay, I was able to resell them at 300% markup.
 
-Timeframe: 3 days
+Timeframe:
+
+- 3 days
 
 Technologies used:
 
