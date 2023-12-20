@@ -5,14 +5,12 @@ This repository includes samples of my code that were used to build academic, pe
 
 ### Intuit E-Commerce
 
-A WIP E-commerce platform, built using modern open-source technologies and Jamstack design principles.
+A WIP E-commerce platform, built using modern open-source technologies and Jamstack design principles. [Source code](/intuit-ecommerce/)
 
 - SvelteKit
 - Typescript
 - TailwindCSS
 - AWS services (EC2, CloudFront, RDS, S3)
-
-[Source code](/intuit-ecommerce/)
 
 ---
 
@@ -20,7 +18,7 @@ A WIP E-commerce platform, built using modern open-source technologies and Jamst
 
 ### Caribay Management
 
-An inventory management application, designed for E-Commerce and Point-of-Sale systems.<br>
+An inventory management application, designed for E-Commerce and Point-of-Sale systems. [Source code](/caribay-management/)<br>
 Built using:
 
 - Quarkus
@@ -28,17 +26,13 @@ Built using:
 - TailwindCSS
 - MariaDB.
 
-[Source code](/caribay-management/)
-
 ### Amazon Shopping Bot
 
-A command-line shopping bot that monitors the availabilty of specific low-supply items sold at online retailers and automatically purchase them as soon as they are in stock.<br>
+A command-line shopping bot that monitors the availabilty of specific low-supply items sold at online retailers and automatically purchase them as soon as they are in stock. [Source code](/amazon-shopping-bot/)<br>
 Built using:
 
 - .NET Framework
 - Selenium.
-
-[Source code](/amazon-shopping-bot/)
 
 ---
 
@@ -50,7 +44,7 @@ A Microsoft Access application created to handle scheduling and reservations of 
 
 ### Supreme Cutz
 
-A web application designed for a local barbershop, that handles customer appointments and sells hair care products.<br>
+A web application designed for a local barbershop, that handles customer appointments and sells hair care products. [Source code](/supreme-cutz/)<br>
 Built using:
 
 - Apache Tomcat
@@ -59,21 +53,17 @@ Built using:
 - Javascript
 - MySQL.
 
-[Source code](/supreme-cutz/)
-
 ### Premier Care
 
-A native Windows CRUD application designed for a local clinic, that handles patient records, appointments, treatment, prescriptions and invoicing.<br>
+A native Windows CRUD application designed for a local clinic, that handles patient records, appointments, treatment, prescriptions and invoicing. [Source code](/premier-care/)<br>
 Built using:
 
 - .NET Framework with Windows Forms
 - Microsoft SQL Server
 
-[Source code](/premier-care/)
-
 ### AutoServe
 
-A web application designed for a local auto-mechanic business. Featuring an administrative panel where staff can assign jobs to mechanics, view that status of jobs and prepare invoicing.<br>
+A web application designed for a local auto-mechanic business. Featuring an administrative panel where staff can assign jobs to mechanics, view that status of jobs and prepare invoicing. [Source code](/autoserve/)<br>
 Built using:
 
 - Apache Tomcat
@@ -82,15 +72,11 @@ Built using:
 - Javascript
 - MySQL.
 
-[Source code](/autoserve/)
-
 ### About Me
 
-A personal portfolio website, with a focus on a visually appealing design and clear visual hierarchy.<br>
+A personal portfolio website, with a focus on a visually appealing design and clear visual hierarchy. [Source code](/about-me/)<br>
 Built using:
 
 - HTML
 - CSS3
 - vanilla Javascript.
-
-[Source code](/about-me/)
