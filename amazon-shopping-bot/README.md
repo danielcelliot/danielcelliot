@@ -15,5 +15,6 @@ Using the bot, I was able to purchase 2 additional PlayStation 5's through amazo
 Timeframe: 3 days
 
 Technologies used:
-.NET Framework (C#)
-Selenium
+
+- .NET Framework (C#)
+- Selenium

@@ -7,6 +7,7 @@ CSS Grid gained widespread browser adoption around 2017 and for this course (201
 Timeframe: 2 weeks
 
 Technologies used:
-HTML
-CSS3 (no libraries or CSS frameworks used)
-Javascript (no libraries used)
+
+- HTML
+- CSS3 (no libraries or CSS frameworks used)
+- Javascript (no libraries used)
