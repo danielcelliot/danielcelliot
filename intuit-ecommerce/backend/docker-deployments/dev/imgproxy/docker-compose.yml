@@ -1,0 +1,35 @@
+#
+name: imgproxy
+
+networks:
+  imgproxy:
+    external: true
+    name: imgproxy_local
+  minio:
+    external: true
+    name: minio_local
+
+services:
+  imgproxy:
+    image: darthsim/imgproxy:latest
+    container_name: imgproxy
+    ports:
+      - 8081:8080
+    networks:
+      - imgproxy
+      - minio
+    environment:
+      - IMGPROXY_ENABLE_AVIF_DETECTION=true
+      - IMGPROXY_ENABLE_WEBP_DETECTION=true
+      - IMGPROXY_ENABLE_CLIENT_HINTS=true
+
+      - IMGPROXY_DEVELOPMENT_ERRORS_MODE=true
+      - IMGPROXY_ALLOW_LOOPBACK_SOURCE_ADDRESSES=true
+
+      - IMGPROXY_KEY=$IMGPROXY_KEY
+      - IMGPROXY_SALT=$IMGPROXY_SALT
+
+      - IMGPROXY_USE_S3=true
+      - IMGPROXY_S3_ENDPOINT=http://minio:9000
+      - AWS_ACCESS_KEY_ID=caribay
+      - AWS_SECRET_ACCESS_KEY=secretkey

@@ -1,0 +1,57 @@
+# medusa seed --seed-file=data/seed.json
+# medusa user -e admin@caribay.tt -p googleme123
+name: medusajs
+
+networks:
+  medusajs:
+    external: true
+    name: medusajs_local
+  postgres:
+    external: true
+    name: postgres_local
+  meilisearch:
+    external: true
+    name: meilisearch_local
+  redis:
+    external: true
+    name: redis_local
+
+volumes:
+  medusajs:
+    name: medusajs_data
+
+services:
+  medusajs:
+    init: true
+    image: danielcelliot.azurecr.io/medusajs:latest
+    container_name: medusajs
+    volumes:
+      - medusajs:/app/medusa
+    environment:
+      NODE_ENV: $NODE_ENV
+      NPM_CONFIG_PRODUCTION: $NPM_CONFIG_PRODUCTION
+      BACKEND_URL: $BACKEND_URL
+      ADMIN_CORS: $ADMIN_CORS
+      STORE_CORS: $STORE_CORS
+      DATABASE_TYPE: $DATABASE_TYPE
+      DATABASE_URL: $DATABASE_URL
+      REDIS_URL: $REDIS_URL
+      MEILISEARCH_HOST: $MEILISEARCH_HOST
+      MEILISEARCH_API_KEY: $MEILISEARCH_API_KEY
+      GOOGLE_CLIENT_ID: $GOOGLE_CLIENT_ID
+      GOOGLE_CLIENT_SECRET: $GOOGLE_CLIENT_SECRET
+      FACEBOOK_CLIENT_ID: $FACEBOOK_CLIENT_ID
+      FACEBOOK_CLIENT_SECRET: $FACEBOOK_CLIENT_SECRET
+      JWT_SECRET: $JWT_SECRET
+      COOKIE_SECRET: $COOKIE_SECRET
+    networks:
+      - medusajs
+      - postgres
+      - redis
+      - meilisearch
+    ports:
+      - 9000:9000
+      - 7001:7001
+    deploy:
+      restart_policy:
+        condition: none

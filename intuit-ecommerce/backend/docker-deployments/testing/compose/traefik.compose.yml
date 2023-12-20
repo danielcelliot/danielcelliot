@@ -1,0 +1,19 @@
+services:
+  traefik:
+    image: traefik:${TRAEFIK_VERSION}
+    container_name: ${TRAEFIK_HOST_NAME}
+    command:
+      - --api=true
+      - --api.dashboard=true
+      - --global.sendAnonymousUsage=false
+      - --providers.docker
+      - --providers.docker.exposedByDefault=false
+      - --entrypoints.web.address=:${TRAEFIK_WEB_PORT}
+      - --entrypoints.proxy.address=:${TRAEFIK_PROXY_PORT}
+      - --log.level=DEBUG
+
+  whoami:
+    image: traefik/whoami
+    container_name: whoami
+    expose:
+      - ${TRAEFIK_WEB_PORT}

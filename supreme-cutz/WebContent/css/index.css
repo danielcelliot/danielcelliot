@@ -1,0 +1,178 @@
+*,
+*::before,
+*::after
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    background-color: black;
+    font-family: sans-serif;
+    font-size: 100%;        /* i.e. font size: 16px */
+    color: white;
+}
+
+ul {
+    list-style: none;
+}
+ul > li a {
+    text-decoration: none;
+    text-transform: uppercase;
+    position: relative;
+    color: white;
+}
+
+.bg-container {
+    z-index: -1;
+}
+.bg-container img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    /* transition: opacity 0.5s; */
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+header {
+    z-index: 1;
+}
+header ul {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.2em 0;
+}
+header ul > li {
+    border-color: transparent;
+    border-width: 1px;
+    border-style: solid;
+}
+header ul > li:hover {
+    border-color: white;
+}
+
+.fas {
+    padding: 0.65em 0.85em;
+}
+
+nav {
+    z-index: 1;
+}
+nav ul {
+    padding-left: 10%;
+    padding-right: 10%;
+    display: flex;
+    /* height: 210%; */
+    height: max-content;
+    align-items: center;
+    justify-content: space-around;
+    background-color: rgba(0,0,0,0.7);
+}
+nav ul > li a {
+    letter-spacing: 1px;
+    font-weight: bold;
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.9);
+}
+nav ul > li a::after {
+    content: '';
+    display: block;
+    height: 5%;
+    background: red;
+    position: absolute;
+    bottom: -25%;
+    left: 0;
+    right: 0;
+    transform: scale(0, 1);
+    transition: transform 250ms ease-in-out;
+}
+nav ul > li a:hover::after {
+    transform: scale(1, 1);
+}
+
+.logo-container {
+    /* width: 14rem; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: .5em 0;
+}
+#s > path {
+    fill: white !important;
+}
+/* #c > path {
+    fill: white !important;
+} */
+#SC-box {
+    stroke: #fff !important;
+}
+
+#logo {
+    width: 4rem;
+}
+.logo {
+    width: 11rem;
+}
+.logo path {
+    fill: white;
+}
+
+
+footer {
+    z-index: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+footer img {
+    width: 2.2rem;
+}
+
+.copyright {
+    font-size: 75%;
+    padding-right: 0.65rem;
+}
+
+.proudtt-logo {
+    padding-right: 0.65rem;
+}
+
+
+/* (1920x1080) Full HD Display */
+@media  screen and (max-width: 1920px) {
+    nav ul > li a {
+        font-size: 140%;;
+    }
+    nav ul > li a::after {
+        height: 10%;
+    }
+
+    .fa-2x {
+        font-size: 140%;
+    }
+}
+
+/* (1366x768) WXGA Display */
+@media  screen and (max-width: 1366px) {
+    nav ul > li a {
+        font-size: 120%;
+    }
+    nav ul > li a::after {
+        height: 8%;
+        bottom: -40%;
+    }
+
+    .fa-2x {
+        font-size: 130%;
+    }
+}

@@ -1,0 +1,68 @@
+.banner {
+    margin-bottom: 0;
+}
+
+.prices-container {
+    display: flex;
+    width: 40%;
+    margin: 0 auto;
+    justify-content: space-between;
+}
+
+.prices-col-1 {
+    width: 40%;
+}
+
+body {
+    height: 100vh;
+}
+
+.container {
+    height: 100%;
+}
+
+main {
+    flex-grow: 1;
+}
+
+main h2 {
+    margin: 0 auto;
+}
+
+main > h2 {
+    margin: 3% auto 1% auto;
+}
+
+.prices-col-1 h3 {
+    margin-top: 10%;
+}
+
+
+.prices-col-2 {
+    margin-bottom: 10%;
+}
+.prices-col-2 h3 {
+    margin-top: 4%;
+}
+
+h3 {
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    font-size: 140%;
+    text-transform: capitalize;
+}
+
+p {
+    /* margin-bottom: .5em; */
+    line-height: 1.6;
+    font-size: 105%;
+    font-weight: 400;
+}
+
+/* (1366x768) WXGA Display */
+@media  screen and (max-width: 1366px) {
+    .prices-container {
+        width: 60%;
+    }
+}

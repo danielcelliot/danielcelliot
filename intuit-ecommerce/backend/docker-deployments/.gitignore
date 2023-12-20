@@ -1,0 +1,8 @@
+# directories
+/.vscode
+/snap
+/env/dev/build
+/env/prod/build
+
+# files
+*.env

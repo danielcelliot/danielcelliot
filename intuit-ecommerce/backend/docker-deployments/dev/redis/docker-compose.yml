@@ -1,0 +1,36 @@
+#
+name: redis
+
+networks:
+  redis:
+    external: true
+    name: redis_local
+
+volumes:
+  redis-medusa:
+    name: redis_medusa_data
+
+services:
+  redis-insight:
+    image: redislabs/redisinsight:1.14.0
+    container_name: redis-insight
+    networks:
+      - redis
+    ports:
+      - 8002:8001
+    deploy:
+      restart_policy:
+        condition: none
+
+  redis-medusa:
+    image: redis:7.2.1-alpine
+    container_name: redis-medusa
+    volumes:
+      - redis-medusa:/data
+    networks:
+      - redis
+    ports:
+      - 6379:6379
+    deploy:
+      restart_policy:
+        condition: none

@@ -1,0 +1,8 @@
+docker build \
+--build-arg=FRAPPE_PATH=https://github.com/frappe/frappe \
+--build-arg=FRAPPE_BRANCH=version-14 \
+--build-arg=PYTHON_VERSION=3.10.5 \
+--build-arg=NODE_VERSION=16.18.0 \
+--build-arg=APPS_JSON_BASE64=Ww0KICB7DQogICAgInVybCI6ICJodHRwczovL2dpdGh1Yi5jb20vZnJhcHBlL2hybXMiLA0KICAgICJicmFuY2giOiAidmVyc2lvbi0xNCINCiAgfSwNCiAgew0KICAgICJ1cmwiOiAiaHR0cHM6Ly9naXRodWIuY29tL2ZyYXBwZS9lcnBuZXh0IiwNCiAgICAiYnJhbmNoIjogInZlcnNpb24tMTQiDQogIH0NCl0= \
+--tag=ellicodan/erpnext-hrms:v14 \
+--file=images/custom/Containerfile .

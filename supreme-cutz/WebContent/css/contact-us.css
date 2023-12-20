@@ -1,0 +1,155 @@
+.card {
+    margin: 0 auto;
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5%;
+}
+
+.card-details {
+    width: 46%;
+}
+
+.card-details p {
+    margin-bottom: .12rem;
+    width: 77%;
+}
+
+.img-container {
+    margin-top: 2rem;
+}
+
+.contact {
+    margin: 1.5rem 0;
+}
+
+.contact a {
+    color: #6D6D71;
+    text-decoration: none;
+}
+
+.location-desc {
+    margin-top: 6%;
+    line-height: 1.4;
+}
+
+.contact-form-container {
+    margin: 0 auto;
+    width: 40%;
+    border: 1px solid white;
+    padding: 2em 5em;
+    margin-bottom: 5%;
+}
+.contact-form-container h3 {
+    text-align: center;
+}
+
+h3 {
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 1rem;
+    font-weight: bold;
+    font-size: 140%;
+
+}
+
+.contact-form-container form {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    margin: 0 auto;
+    /* transition: all 0.5s ease-in-out; */
+}
+
+.contact-form-container p {
+    /* width: 70%; */
+    margin: 0 auto;
+    line-height: 1.6;
+    margin-bottom: 4%;
+    /* padding: 0 20px; */
+}
+
+.input-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.wrap-input {
+    border: 1px solid #373C3F;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.input-half {
+    width: 50%;
+}
+
+.input-full {
+    width: 100%;
+}
+.input-full.wide {
+    height: 300px;
+}
+
+input {
+    outline: none;
+    border: none;
+    font-size: 18px;
+    line-height: 1.2;
+    background-color: transparent;
+    color: rgb(168, 160, 149);
+    height: 55px;
+    padding-left: 25px;
+    padding-right: 25px;
+    width: 100%;
+}
+
+textarea {
+    outline: none;
+    resize: none;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    color: rgb(168, 160, 149);
+    font-family: sans-serif;
+    font-size: 18px;
+    line-height: 1.4;
+    padding: 25px;
+    border: 1px solid #373C3F;
+    border-radius: 0;
+}
+
+.submit-btn-container button {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.4s;
+    outline: none !important;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    height: 56px;
+    width: 100%;
+}
+.submit-btn-container button:hover {
+    cursor: pointer;
+    background-color: white;
+    color: red;
+}
+
+.modal-container.modal-success {
+	display: initial;
+}
+
+
+/* (1366x768) WXGA Display */
+@media  screen and (max-width: 1366px) {
+    .contact-form-container {
+        width: 55%;
+    }
+
+    .card {
+        width: 80%;
+    }
+}

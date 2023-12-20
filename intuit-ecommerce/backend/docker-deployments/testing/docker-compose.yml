@@ -1,0 +1,868 @@
+#
+name: intuit_backend
+
+networks:
+  public:
+    name: public
+  lan:
+    name: lan
+  postgres:
+    name: postgres
+  mariadb:
+    name: mariadb
+  saleor:
+    name: saleor_internal
+  erpnext:
+    name: erpnext_internal
+  airbyte:
+    name: airbyte_internal
+  kratos:
+    name: kratos_internal
+  matomo:
+    name: matomo_internal
+  chatwoot:
+    name: chatwoot_internal
+  loki:
+    name: loki_internal
+
+volumes:
+  redis:
+    name: redis_data
+  postgres:
+    name: postgres_data
+  mariadb:
+    name: mariadb_data
+  portainer:
+    name: portainer_data
+  media:
+    name: saleor_media
+  sites:
+    name: erpnext_sites
+  logs:
+    name: erpnext_logs
+  assets:
+    name: erpnext_assets
+  apps:
+    name: erpnext_apps
+  workspace:
+    name: airbyte_workspace
+  data:
+    name: airbyte_data
+  matomo:
+    name: matomo_data
+  kratos:
+    name: kratos_data
+  chatwoot:
+    name: chatwoot_data
+  typesense:
+    name: typesense_data
+  grafana:
+    name: grafana_data
+  pgadmin:
+    name: pgadmin_data
+  zookeeper-data:
+    name: zookeeper_data
+  zookeeper-datalog:
+    name: zookeeper_datalog
+  zookeeper-logs:
+    name: zookeeper_logs
+  object_storage:
+    name: minio_data
+  clickhouse-data:
+    name: clickhouse_data
+
+configs:
+  flags:
+    file: ./config/airbyte/flags.yml
+
+x-saleor-build: &saleor-build
+  build:
+    context: ./build/saleor
+    dockerfile: ./Dockerfile
+    args:
+      STATIC_URL: "/static/"
+
+x-erpnext-volumes: &erpnext-volumes
+  volumes:
+    - sites:/home/frappe/frappe-bench/sites
+    - logs:/home/frappe/frappe-bench/logs
+    - assets:/home/frappe/frappe-bench/sites/assets
+    - apps:/home/frappe/frappe-bench/apps
+
+x-kratos-volumes: &kratos-volumes
+  volumes:
+    - ./config/kratos:/etc/config/kratos
+    - kratos:/var/lib/sqlite
+    - kratos:/home/ory
+
+x-loki-logging: &loki-logging
+  labels:
+    logging: "promtail"
+    logging_jobname: "containerlogs"
+
+services:
+  # ------------------------------------------------- DEV CONTAINERS -------------------------------------------------
+
+  mailhog:
+    image: mailhog/mailhog:${MAILHOG_VERSION}
+    container_name: ${MAILHOG_HOST_NAME}
+    environment:
+      MH_SMTP_BIND_ADDR: 0.0.0.0:${MAILHOG_SERVICE_PORT}
+      MH_HOSTNAME: ${MAILHOG_HOST_NAME}
+    expose:
+      - ${MAILHOG_SERVICE_PORT}
+      - ${MAILHOG_UI_PORT}
+    networks:
+      - lan
+      - saleor
+    labels:
+      traefik.enable: true
+      traefik.http.routers.mailhog.entrypoints: proxy
+      traefik.http.routers.mailhog.rule: Host(`${MAILHOG_URL}`)
+      traefik.http.routers.mailhog.service: mailhog
+      traefik.http.services.mailhog.loadbalancer.server.port: ${MAILHOG_UI_PORT}
+      traefik.docker.network: lan
+    deploy:
+      restart_policy:
+        condition: none
+
+  # ------------------------------------------------- DATABASES -------------------------------------------------
+
+  redis:
+    image: redis:${REDIS_VERSION}
+    container_name: ${REDIS_HOST_NAME}
+    command: --port ${REDIS_PORT}
+    expose:
+      - ${REDIS_PORT}
+    networks:
+      - chatwoot
+      - erpnext
+      - saleor
+    volumes:
+      - redis:/data
+    labels:
+      logging: "promtail"
+      logging_jobname: "containerlogs"
+    deploy:
+      restart_policy:
+        condition: none
+
+  postgres:
+    image: postgres:${POSTGRES_VERSION}
+    container_name: ${POSTGRES_HOST_NAME}
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_MULTIPLE_DATABASES: ${SALEOR_DB_NAME},${AIRBYTE_DB_NAME},${KRATOS_DB_NAME}
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    networks:
+      - postgres
+    volumes:
+      - ./build/docker-postgresql-multiple-databases:/docker-entrypoint-initdb.d
+      - postgres:/var/lib/postgresql/data
+    labels:
+      logging: "promtail"
+      logging_jobname: "containerlogs"
+    deploy:
+      restart_policy:
+        condition: none
+
+  mariadb:
+    image: mariadb:${MARIADB_VERSION}
+    container_name: ${MARIADB_HOST_NAME}
+    environment:
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MARIADB_AUTO_UPGRADE: ${MARIADB_AUTO_UPGRADE}
+      MARIADB_INITDB_SKIP_TZINFO: ${MARIADB_INITDB_SKIP_TZINFO}
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --skip-character-set-client-handshake
+      - --skip-innodb-read-only-compressed # Temporary fix for MariaDB 10.6 & ERPNext
+      - --max-allowed-packet=64MB # Required for Matomo
+    ports:
+      - ${MARIADB_PORT}:${MARIADB_PORT}
+    networks:
+      - mariadb
+    volumes:
+      - mariadb:/var/lib/mysql
+    deploy:
+      restart_policy:
+        condition: none
+
+  zookeeper:
+    image: zookeeper:3.7.0
+    container_name: zookeeper
+    volumes:
+      - zookeeper-datalog:/datalog
+      - zookeeper-data:/data
+      - zookeeper-logs:/logs
+    restart: "no"
+
+  kafka:
+    image: bitnami/kafka:2.8.1-debian-10-r99
+    container_name: kafka
+    environment:
+      KAFKA_BROKER_ID: 1001
+      KAFKA_CFG_RESERVED_BROKER_MAX_ID: 1001
+      KAFKA_CFG_LISTENERS: PLAINTEXT://:9092
+      KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper:2181
+      ALLOW_PLAINTEXT_LISTENER: "true"
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    restart: "no"
+
+  clickhouse:
+    image: clickhouse/clickhouse-server:22.8
+    container_name: clickhouse
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    network_mode: host
+    ports:
+      - 8123:8123
+      - 9000:9000
+      - 9440:9440
+      - 9009:9009
+    volumes:
+      - ./posthog/posthog/idl:/idl
+      - ./posthog/docker/clickhouse/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - ./posthog/docker/clickhouse/config.xml:/etc/clickhouse-server/config.xml
+      - ./posthog/docker/clickhouse/users.xml:/etc/clickhouse-server/users.xml
+      - ./posthog/docker/clickhouse:/etc/clickhouse-server
+      - clickhouse-data:/var/lib/clickhouse
+    depends_on:
+      - kafka
+      - zookeeper
+
+  # ------------------------------------------------- OTHER SERVICES -------------------------------------------------
+
+  traefik:
+    extends:
+      file: ./compose/traefik.compose.yml
+      service: traefik
+    ports:
+      - ${TRAEFIK_WEB_PORT}:${TRAEFIK_WEB_PORT}
+      - ${TRAEFIK_PROXY_PORT}:${TRAEFIK_PROXY_PORT}
+    networks:
+      - public
+      - lan
+    labels:
+      logging: "promtail"
+      logging_jobname: "containerlogs"
+      traefik.enable: true
+      traefik.http.routers.traefik-dashboard.entrypoints: proxy
+      traefik.http.routers.traefik-dashboard.rule: Host(`${TRAEFIK_URL}`)
+      traefik.http.routers.traefik-dashboard.service: api@internal
+      traefik.http.routers.traefik-dashboard.middlewares: admin-basic-auth
+      traefik.http.middlewares.admin-basic-auth.basicauth.usersFile: ${BASIC_AUTH_FILENAME}
+      traefik.http.services.traefik-dashboard.loadbalancer.server.port: ${TRAEFIK_PROXY_PORT}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./config/${BASIC_AUTH_FILENAME}:/${BASIC_AUTH_FILENAME}
+    deploy:
+      restart_policy:
+        condition: none
+
+  portainer:
+    extends:
+      file: ./compose/portainer.compose.yml
+      service: portainer
+    expose:
+      - ${PORTAINER_PORT}
+    networks:
+      - lan
+    labels:
+      traefik.enable: true
+      traefik.http.routers.portainer.entrypoints: proxy
+      traefik.http.routers.portainer.rule: Host(`${PORTAINER_URL}`)
+      traefik.http.routers.portainer.service: portainer
+      traefik.http.services.portainer.loadbalancer.server.port: ${PORTAINER_PORT}
+      traefik.docker.network: lan
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer:/data
+    deploy:
+      restart_policy:
+        condition: none
+
+  matomo:
+    extends:
+      file: ./compose/matomo.compose.yml
+      service: app
+    expose:
+      - ${MATOMO_PORT}
+    networks:
+      - lan
+      - matomo
+    labels:
+      traefik.enable: true
+      traefik.http.routers.matomo.entrypoints: proxy
+      traefik.http.routers.matomo.rule: Host(`${MATOMO_URL}`)
+      traefik.http.routers.matomo.service: matomo
+      traefik.http.services.matomo.loadbalancer.server.port: ${MATOMO_PORT}
+      traefik.docker.network: lan
+    volumes:
+      # - ./config:/var/www/html/config:rw
+      # - ./logs:/var/www/html/logs
+      - ./config/matomo/php.ini:/usr/local/etc/php/php.ini
+      - matomo:/var/www/html
+    depends_on:
+      mariadb:
+        condition: service_started
+    deploy:
+      restart_policy:
+        condition: none
+
+  typesense:
+    image: typesense/typesense:${TYPESENSE_VERSION}
+    container_name: ${TYPESENSE_HOST_NAME}
+    command: "--data-dir /data --api-key=xyz --enable-cors"
+    expose:
+      - ${TYPESENSE_PORT}
+    networks:
+      - lan
+    labels:
+      traefik.enable: true
+      traefik.http.routers.typesense.entrypoints: proxy
+      traefik.http.routers.typesense.rule: (Host(`localhost`) && Path(`/search`))
+      traefik.http.routers.typesense.service: typesense
+      traefik.http.services.typesense.loadbalancer.server.port: ${TYPESENSE_PORT}
+    volumes:
+      - typesense:/data
+    deploy:
+      restart_policy:
+        condition: none
+
+  glances:
+    image: nicolargo/glances:${GLANCES_VERSION}
+    container_name: ${GLANCES_HOST_NAME}
+    environment:
+      GLANCES_OPT: -w
+    pid: host
+    expose:
+      - ${GLANCES_PORT}
+    networks:
+      - lan
+    labels:
+      logging: "promtail"
+      logging_jobname: "containerlogs"
+      traefik.enable: true
+      traefik.http.routers.glances.entrypoints: proxy
+      traefik.http.routers.glances.rule: Host(`${GLANCES_URL}`)
+      traefik.http.routers.glances.service: glances
+      traefik.http.services.glances.loadbalancer.server.port: ${GLANCES_PORT}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./config/glances/glances.conf:/etc/glances/glances.conf
+
+  pgAdmin:
+    image: dpage/pgadmin4:6.20
+    container_name: pgAdmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@intuit.co.tt
+      PGADMIN_DEFAULT_PASSWORD: googleme123
+    expose:
+      - 80
+    networks:
+      - postgres
+      - lan
+    labels:
+      logging: "promtail"
+      logging_jobname: "containerlogs"
+      traefik.enable: true
+      traefik.http.routers.pgadmin.entrypoints: proxy
+      traefik.http.routers.pgadmin.rule: Host(`admin.postgres.localhost`)
+      traefik.http.routers.pgadmin.service: pgadmin
+      traefik.http.services.pgadmin.loadbalancer.server.port: 80
+      traefik.docker.network: lan
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+
+  phpMyAdmin:
+    image: phpmyadmin:5.2.1
+    container_name: phpMyAdmin
+    environment:
+      PMA_ARBITRARY: 1
+    expose:
+      - 80
+    networks:
+      - mariadb
+      - lan
+    labels:
+      logging: "promtail"
+      logging_jobname: "containerlogs"
+      traefik.enable: true
+      traefik.http.routers.phpmyadmin.entrypoints: proxy
+      traefik.http.routers.phpmyadmin.rule: Host(`admin.mariadb.localhost`)
+      traefik.http.routers.phpmyadmin.service: phpmyadmin
+      traefik.http.services.phpmyadmin.loadbalancer.server.port: 80
+      traefik.docker.network: lan
+
+  # ------------------------------------------------- SALEOR -------------------------------------------------
+
+  saleor:
+    extends:
+      file: ./compose/saleor.compose.yml
+      service: saleor
+    <<: *saleor-build
+    expose:
+      - ${SALEOR_PORT}
+    networks:
+      - lan
+      - saleor
+    labels:
+      traefik.enable: true
+      traefik.http.routers.saleor.entrypoints: proxy
+      traefik.http.routers.saleor.rule: Host(`${SALEOR_URL}`)
+      traefik.http.routers.saleor.service: saleor
+      traefik.http.services.saleor.loadbalancer.server.port: ${SALEOR_PORT}
+      traefik.docker.network: lan
+    volumes:
+      - ./build/saleor/saleor/:/app/saleor:Z
+      - ./build/saleor/templates/:/app/templates:Z
+      - media:/app/media
+    depends_on:
+      redis:
+        condition: service_started
+      postgres:
+        condition: service_started
+    deploy:
+      restart_policy:
+        condition: none
+
+  saleor-worker:
+    extends:
+      file: ./compose/saleor.compose.yml
+      service: saleor-worker
+    <<: *saleor-build
+    networks:
+      - saleor
+    volumes:
+      - ./build/saleor/saleor/:/app/saleor:Z,cached
+      - ./build/saleor/templates/:/app/templates:Z,cached
+      - media:/app/media
+    depends_on:
+      saleor:
+        condition: service_started
+      redis:
+        condition: service_started
+      mailhog:
+        condition: service_started
+    deploy:
+      restart_policy:
+        condition: none
+
+  # ------------------------------------------------- ERPNEXT -------------------------------------------------
+
+  erpnext-configurator:
+    extends:
+      file: ./compose/erpnext.compose.yml
+      service: erpnext-configurator
+    networks:
+      - erpnext
+    <<: *erpnext-volumes
+    depends_on:
+      mariadb:
+        condition: service_started
+      redis:
+        condition: service_started
+    deploy:
+      restart_policy:
+        condition: none
+
+  erpnext-websocket:
+    extends:
+      file: ./compose/erpnext.compose.yml
+      service: erpnext-websocket
+    expose:
+      - ${ERPNEXT_WEBSOCKET_PORT}
+    networks:
+      - erpnext
+    <<: *erpnext-volumes
+    deploy:
+      restart_policy:
+        condition: none
+
+  erpnext-backend:
+    extends:
+      file: ./compose/erpnext.compose.yml
+      service: erpnext-backend
+    expose:
+      - ${ERPNEXT_BACKEND_PORT}
+    networks:
+      - erpnext
+    <<: *erpnext-volumes
+    deploy:
+      restart_policy:
+        condition: none
+
+  erpnext-frontend:
+    extends:
+      file: ./compose/erpnext.compose.yml
+      service: erpnext-frontend
+    expose:
+      - ${ERPNEXT_FRONTEND_PORT}
+    networks:
+      - lan
+      - erpnext
+    labels:
+      traefik.enable: true
+      traefik.http.routers.erpnext.entrypoints: proxy
+      traefik.http.routers.erpnext.rule: Host(`${ERPNEXT_URL}`)
+      traefik.http.routers.erpnext.service: erpnext
+      traefik.http.services.erpnext.loadbalancer.server.port: ${ERPNEXT_FRONTEND_PORT}
+      traefik.docker.network: lan
+    <<: *erpnext-volumes
+    deploy:
+      restart_policy:
+        condition: none
+
+  erpnext-queue-default:
+    extends:
+      file: ./compose/erpnext.compose.yml
+      service: erpnext-queue-default
+    networks:
+      - erpnext
+    <<: *erpnext-volumes
+    deploy:
+      restart_policy:
+        condition: none
+
+  erpnext-queue-long:
+    extends:
+      file: ./compose/erpnext.compose.yml
+      service: erpnext-queue-long
+    networks:
+      - erpnext
+    <<: *erpnext-volumes
+    deploy:
+      restart_policy:
+        condition: none
+
+  erpnext-queue-short:
+    extends:
+      file: ./compose/erpnext.compose.yml
+      service: erpnext-queue-short
+    networks:
+      - erpnext
+    <<: *erpnext-volumes
+    deploy:
+      restart_policy:
+        condition: none
+
+  erpnext-scheduler:
+    extends:
+      file: ./compose/erpnext.compose.yml
+      service: erpnext-scheduler
+    networks:
+      - erpnext
+    <<: *erpnext-volumes
+    deploy:
+      restart_policy:
+        condition: none
+
+  # ------------------------------------------------- AIRBYTE -------------------------------------------------
+
+  airbyte-init:
+    extends:
+      file: ./compose/airbyte.compose.yml
+      service: airbyte-init
+    networks:
+      - airbyte
+    volumes:
+      - ${AIRBYTE_HACK_LOCAL_ROOT_PARENT}:/local_parent
+    deploy:
+      restart_policy:
+        condition: none
+
+  airbyte-bootloader:
+    extends:
+      file: ./compose/airbyte.compose.yml
+      service: airbyte-bootloader
+    networks:
+      - airbyte
+    depends_on:
+      postgres:
+        condition: service_started
+      airbyte-init:
+        condition: service_completed_successfully
+    deploy:
+      restart_policy:
+        condition: none
+
+  airbyte-worker:
+    extends:
+      file: ./compose/airbyte.compose.yml
+      service: airbyte-worker
+    expose:
+      - ${AIRBYTE_WORKER_PORT}
+    networks:
+      - airbyte
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - workspace:${AIRBYTE_WORKSPACE_ROOT}
+      - ${AIRBYTE_LOCAL_ROOT}:${AIRBYTE_LOCAL_ROOT}
+    deploy:
+      restart_policy:
+        condition: none
+
+  airbyte-server:
+    extends:
+      file: ./compose/airbyte.compose.yml
+      service: airbyte-server
+    expose:
+      - ${AIRBYTE_SERVER_PORT}
+    networks:
+      - airbyte
+    volumes:
+      - workspace:${AIRBYTE_WORKSPACE_ROOT}
+      - data:${AIRBYTE_CONFIG_ROOT}
+      - ${AIRBYTE_LOCAL_ROOT}:${AIRBYTE_LOCAL_ROOT}
+    deploy:
+      restart_policy:
+        condition: none
+
+  airbyte-connector-builder-server:
+    extends:
+      file: ./compose/airbyte.compose.yml
+      service: airbyte-connector-builder-server
+    expose:
+      - ${AIRBYTE_CONNECTOR_PORT}
+    networks:
+      - airbyte
+    deploy:
+      restart_policy:
+        condition: none
+
+  airbyte-webapp:
+    extends:
+      file: ./compose/airbyte.compose.yml
+      service: airbyte-webapp
+    expose:
+      - ${AIRBYTE_WEBAPP_PORT}
+    networks:
+      - airbyte
+    deploy:
+      restart_policy:
+        condition: none
+
+  airbyte-temporal:
+    extends:
+      file: ./compose/airbyte.compose.yml
+      service: airbyte-temporal
+    expose:
+      - ${AIRBYTE_TEMPORAL_PORT}
+    networks:
+      - airbyte
+    volumes:
+      - ./config/temporal/dynamicconfig:/etc/temporal/config/dynamicconfig
+    depends_on:
+      postgres:
+        condition: service_started
+    deploy:
+      restart_policy:
+        condition: none
+
+  airbyte-cron:
+    extends:
+      file: ./compose/airbyte.compose.yml
+      service: airbyte-cron
+    networks:
+      - airbyte
+    volumes:
+      - workspace:${AIRBYTE_WORKSPACE_ROOT}
+    deploy:
+      restart_policy:
+        condition: none
+
+  airbyte-proxy:
+    extends:
+      file: ./compose/airbyte.compose.yml
+      service: airbyte-proxy
+    expose:
+      - ${AIRBYTE_PROXY_PORT}
+      # - 8001
+      # - 8003
+    networks:
+      - lan
+      - airbyte
+    labels:
+      traefik.enable: true
+      traefik.http.routers.airbyte.entrypoints: proxy
+      traefik.http.routers.airbyte.rule: Host(`${AIRBYTE_URL}`)
+      traefik.http.routers.airbyte.service: airbyte
+      traefik.http.services.airbyte.loadbalancer.server.port: ${AIRBYTE_PROXY_PORT}
+      traefik.docker.network: lan
+    deploy:
+      restart_policy:
+        condition: none
+
+  # ------------------------------------------------- ORY KRATOS -------------------------------------------------
+
+  kratos-migrate:
+    extends:
+      file: ./compose/kratos.compose.yml
+      service: kratos-migrate
+    networks:
+      - kratos
+    <<: *kratos-volumes
+    labels:
+      logging: "promtail"
+      logging_jobname: "containerlogs"
+    depends_on:
+      postgres:
+        condition: service_started
+    deploy:
+      restart_policy:
+        condition: none
+
+  kratos:
+    extends:
+      file: ./compose/kratos.compose.yml
+      service: kratos
+    networks:
+      - public
+      - kratos
+    <<: *kratos-volumes
+    labels:
+      logging: "promtail"
+      logging_jobname: "containerlogs"
+    deploy:
+      restart_policy:
+        condition: none
+
+  # ------------------------------------------------- CHATWOOT -------------------------------------------------
+
+  chatwoot-migrate:
+    extends:
+      file: ./compose/chatwoot.compose.yml
+      service: rails-migrate
+    networks:
+      - chatwoot
+    volumes:
+      - chatwoot:/app/storage
+    <<: *loki-logging
+    depends_on:
+      postgres:
+        condition: service_started
+      redis:
+        condition: service_started
+    deploy:
+      restart_policy:
+        condition: none
+
+  chatwoot-worker:
+    extends:
+      file: ./compose/chatwoot.compose.yml
+      service: sidekiq
+    networks:
+      - chatwoot
+    volumes:
+      - chatwoot:/app/storage
+    <<: *loki-logging
+    depends_on:
+      postgres:
+        condition: service_started
+      redis:
+        condition: service_started
+    deploy:
+      restart_policy:
+        condition: none
+
+  chatwoot:
+    extends:
+      file: ./compose/chatwoot.compose.yml
+      service: rails
+    expose:
+      - ${CHATWOOT_PORT}
+    networks:
+      - lan
+      - chatwoot
+    volumes:
+      - chatwoot:/app/storage
+    labels:
+      logging: "promtail"
+      logging_jobname: "containerlogs"
+      traefik.enable: true
+      traefik.http.routers.chatwoot.entrypoints: proxy
+      traefik.http.routers.chatwoot.rule: Host(`${CHATWOOT_URL}`)
+      traefik.http.routers.chatwoot.service: chatwoot
+      traefik.http.services.chatwoot.loadbalancer.server.port: ${CHATWOOT_PORT}
+      traefik.docker.network: lan
+    depends_on:
+      chatwoot-migrate:
+        condition: service_completed_successfully
+    deploy:
+      restart_policy:
+        condition: none
+
+  # ------------------------------------------------- GRAFANA LOKI -------------------------------------------------
+
+  grafana-loki:
+    extends:
+      file: ./compose/loki.compose.yml
+      service: loki
+    expose:
+      - ${LOKI_PORT}
+    networks:
+      - loki
+    volumes:
+      - ./config/loki:/etc/loki/
+    <<: *loki-logging
+    deploy:
+      restart_policy:
+        condition: none
+
+  grafana-promtail:
+    extends:
+      file: ./compose/loki.compose.yml
+      service: promtail
+    expose:
+      - ${PROMTAIL_PORT}
+    networks:
+      - loki
+    volumes:
+      - ./config/promtail:/etc/promtail/
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    <<: *loki-logging
+    depends_on:
+      grafana-loki:
+        condition: service_started
+    deploy:
+      restart_policy:
+        condition: none
+
+  grafana:
+    extends:
+      file: ./compose/loki.compose.yml
+      service: grafana
+    expose:
+      - ${GRAFANA_PORT}
+    networks:
+      - loki
+      - lan
+    volumes:
+      - ./config/grafana/datasources.yml:/etc/grafana/provisioning/datasources/datasources.yaml
+      - grafana:/var/lib/grafana
+    labels:
+      logging: "promtail"
+      logging_jobname: "containerlogs"
+      traefik.enable: true
+      traefik.http.routers.grafana.entrypoints: proxy
+      traefik.http.routers.grafana.rule: Host(`${GRAFANA_URL}`)
+      traefik.http.routers.grafana.service: grafana
+      traefik.http.services.grafana.loadbalancer.server.port: ${GRAFANA_PORT}
+      traefik.docker.network: lan
+    deploy:
+      restart_policy:
+        condition: none
+# ------------------------------------------------- SERVICES END -------------------------------------------------

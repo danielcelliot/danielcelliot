@@ -1,0 +1,36 @@
+x-env: &env
+  environment:
+    - DSN=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST_NAME}:${POSTGRES_PORT}/${KRATOS_DB_NAME}?sslmode=disable&max_conns=20&max_idle_conns=4  # Postgresql
+    - LOG_LEVEL=trace
+
+services:
+  kratos-migrate:
+    image: oryd/kratos:${KRATOS_VERSION}
+    container_name: ${KRATOS_HOST_NAME}-migrate
+    command: --config /etc/config/kratos/kratos.yml migrate sql --read-from-env --yes
+    <<: *env
+
+  kratos:
+    image: oryd/kratos:${KRATOS_VERSION}
+    container_name: ${KRATOS_HOST_NAME}
+    command: serve --config /etc/config/kratos/kratos.yml --watch-courier --sqa-opt-out --dev
+    <<: *env
+    ports:
+      - 4433:4433 # public
+      - 4434:4434 # admin
+    depends_on:
+      kratos-migrate:
+        condition: service_completed_successfully
+
+  # kratos-selfservice-ui-node:
+  #   image: oryd/kratos-selfservice-ui-node:v0.11.0
+  #   ports:
+  #     - 4455:4455
+  #   restart: on-failure
+  #   environment:
+  #     - KRATOS_PUBLIC_URL=http://kratos:4433/
+  #     - KRATOS_BROWSER_URL=http://127.0.0.1:4433/
+  #     - PORT=4455
+  #     - SECURITY_MODE=
+  #   networks:
+  #     - intranet

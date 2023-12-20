@@ -1,0 +1,23 @@
+@import './pages.css';
+
+/*----------------------------------------------   
+--About page
+-----------------------------------------------  */
+.btn--back {
+    background: var(--projects-colour);
+}
+.btn--back:hover {
+    background: var(--projects-colour-light);
+}
+
+.page-header::after {
+    background: var(--projects-colour);
+}
+
+.heading {
+    color: var(--projects-colour);
+}
+
+.main-panel {
+    background: #333;
+}

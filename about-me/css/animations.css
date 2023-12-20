@@ -1,0 +1,293 @@
+@import './main.css';
+
+
+/*----------------------------------------------   
+--Keyframes
+-----------------------------------------------  */
+@keyframes ink-stroke {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-in--short {
+    60% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes slide-in {
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes scale-in {
+    100% {
+        transform: scaleX(1);
+    }
+}
+
+@-webkit-keyframes move-down {
+	0% { 
+		-webkit-transform: translateY(-40px); 
+		opacity: 0;
+	}
+	100% { 
+		-webkit-transform: translateY(0px);  
+		opacity: 1;
+	}
+}
+
+@keyframes move-down {
+	0% { 
+		transform: translateY(-40px); 
+		opacity: 0;
+	}
+	100% { 
+		transform: translateY(0px);  
+		opacity: 1;
+	}
+}
+
+@-webkit-keyframes move-up {
+	0% { 
+		-webkit-transform: translateY(40px); 
+		opacity: 0;
+	}
+	100% { 
+		-webkit-transform: translateY(0px);  
+		opacity: 1;
+	}
+}
+
+@keyframes move-up {
+	0% { 
+		transform: translateY(40px); 
+		opacity: 0;
+	}
+	100% { 
+		transform: translateY(0px);  
+		opacity: 1;
+	}
+}
+
+@keyframes to-about {
+    to {
+        transform: translate(-22.4%, -31.6%);
+    }
+}
+
+@keyframes to-career {
+    to {
+        transform: translate(-68.4%, -22.4%);
+    }
+}
+
+@keyframes to-personal {
+    to {
+        transform: translate(-31.6%, -77.6%);
+    }
+}
+
+@keyframes to-projects {
+    to {
+        transform: translate(-77.6%, -68.4%)
+    }
+}
+
+@keyframes bg-about {
+    to {
+        background-color: var(--about-colour);
+    }
+}
+
+@keyframes loader {
+    0%, 50%, 100% {
+        width: 70px;
+        height: 70px;
+    }
+    25% {
+        width: 90px;
+        height: 90px;
+    }
+}
+
+@keyframes loader-block--red {
+    0%, 5% {
+        transform: rotate(0);
+    }
+    25%, 100% {
+        transform: rotate(-90deg);
+    }
+
+    /*-- Light up v. 1 --*/
+    49% {
+        background-color: var(--main-font-colour);
+    }
+    50% {
+        background-color: var(--about-colour);
+    }
+    80% {
+        background-color: var(--main-font-colour);
+    }
+}
+
+@keyframes loader-block--blue {
+    0%, 10% {
+        transform: rotate(0);
+    }
+    25%, 100% {
+        transform: rotate(90deg);
+    }
+
+    /*-- Light up v. 1 --*/
+    54% {
+        background-color: var(--main-font-colour);
+    }
+    55% {
+        background-color: var(--career-colour);
+    }
+    85% {
+        background-color: var(--main-font-colour);
+    }
+}
+
+@keyframes loader-block--green {
+    0%, 10% {
+        transform: rotate(0);
+    }
+    25%, 100% {
+        transform: rotate(90deg);
+    }
+
+    /*-- Light up v. 1 --*/
+    59% {
+        background-color: var(--main-font-colour);
+    }
+    60% {
+        background-color: var(--personal-colour);
+    }
+    90% {
+        background-color: var(--main-font-colour);
+    }
+}
+
+@keyframes loader-block--purple {
+    0%, 5% {
+        transform: rotate(0);
+    }
+    25%, 100% {
+        transform: rotate(-90deg);
+    }
+
+    /*-- Light up v. 1 --*/
+    64% {
+        background-color: var(--main-font-colour);
+    }
+    65% {
+        background-color: var(--projects-colour);
+    }
+    95% {
+        background-color: var(--main-font-colour);
+    }
+}
+
+
+/*----------------------------------------------   
+--Animation classes
+-----------------------------------------------  */
+.animate-stroke {
+    animation-duration: 500ms;
+    animation-fill-mode: forwards;
+    animation-name: ink-stroke;
+    animation-timing-function: ease-in;
+    stroke-dasharray: 300;
+    stroke-dashoffset: 300;
+}
+
+.fade-out {
+    animation-duration: 500ms;
+    animation-fill-mode: forwards;
+    animation-name: fade-out;
+    animation-timing-function: ease-in;
+}
+
+.fade-out--fast {
+    animation-duration: 250ms;
+    animation-fill-mode: forwards;
+    animation-name: fade-out;
+    animation-timing-function: ease-in;
+}
+
+.fade-in {
+    animation-duration: 500ms;
+    animation-fill-mode: forwards;
+    animation-name: fade-in;
+    animation-timing-function: ease-in;
+}
+
+.move-grid--about,
+.move-grid--career,
+.move-grid--personal,
+.move-grid--projects
+{
+    animation-duration: 600ms;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+}
+
+.move-grid--about {
+    animation-name: to-about;
+}
+
+.move-grid--career {
+    animation-name: to-career;
+}
+
+.move-grid--personal {
+    animation-name: to-personal;
+}
+
+.move-grid--projects {
+    animation-name: to-projects;
+}
+
+.move-heading--down {
+	-webkit-animation: move-down 0.6s ease-in-out 0.2s backwards;
+	animation: move-down 0.6s ease-in-out 0.2s backwards;
+}
+
+.move-paragraph--up {
+	-webkit-animation: move-up 0.6s ease-in-out 0.2s backwards;
+	animation: move-up 0.6s ease-in-out 0.2s backwards;
+}
+
+.loaded .page-header::after {
+    animation: scale-in 1.0s ease-in 0.2s forwards;
+}
+
+.load-in-content {
+    animation: fade-in--short 0.5s ease-in 0.7s forwards, slide-in 0.8s ease-in 0.9s forwards;
+}

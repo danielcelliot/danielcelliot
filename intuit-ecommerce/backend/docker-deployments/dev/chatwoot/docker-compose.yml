@@ -1,0 +1,113 @@
+#
+# .ENV example: https://github.com/chatwoot/chatwoot/blob/develop/.env.example
+# create super user: https://www.chatwoot.com/docs/self-hosted/monitoring/super-admin-sidekiq
+# console: bundle exec rails c
+# command: s = SuperAdmin.create!(email: "admin@caribay.tt", password: "Googleme123!", name: "administrator")
+# admin login url: http://chat.localhost:8080/super_admin/sign_in
+name: chatwoot
+
+networks:
+  chatwoot:
+    external: true
+    name: chatwoot_external
+  postgres:
+    external: true
+    name: postgres_external
+
+volumes:
+  chatwoot:
+    name: chatwoot_data
+  redis-cache:
+    name: redis_chatwoot_cache_data
+
+x-base: &base
+  image: chatwoot/chatwoot:$CHATWOOT_VERSION
+  environment:
+    NODE_ENV: production
+    RAILS_ENV: production
+    INSTALLATION_ENV: docker
+    FRONTEND_URL: $CHATWOOT_FRONTEND_URL
+    SECRET_KEY_BASE: $CHATWOOT_SECRET_KEY_BASE
+    # DATABASE_URL: $CHATWOOT_DATABASE_URL
+    POSTGRES_HOST: $CHATWOOT_POSTGRES_HOST
+    POSTGRES_PORT: $CHATWOOT_POSTGRES_PORT
+    POSTGRES_DATABASE: $CHATWOOT_POSTGRES_DATABASE
+    POSTGRES_USERNAME: $CHATWOOT_POSTGRES_USERNAME
+    POSTGRES_PASSWORD: $CHATWOOT_POSTGRES_PASSWORD
+    REDIS_URL: $CHATWOOT_REDIS_URL
+    REDIS_PASSWORD: $CHATWOOT_REDIS_PASSWORD
+    LOG_LEVEL: $CHATWOOT_LOG_LEVEL
+    LOG_SIZE: $CHATWOOT_LOG_SIZE
+    ENABLE_ACCOUNT_SIGNUP: $CHATWOOT_ENABLE_ACCOUNT_SIGNUP
+    MAILER_SENDER_EMAIL: $CHATWOOT_MAILER_SENDER_EMAIL
+    SMTP_DOMAIN: $CHATWOOT_SMTP_DOMAIN
+    SMTP_ADDRESS: $CHATWOOT_SMTP_ADDRESS
+    SMTP_PORT: $CHATWOOT_SMTP_PORT
+    SMTP_ENABLE_STARTTLS_AUTO: $CHATWOOT_SMTP_ENABLE_STARTTLS_AUTO
+    SMTP_OPENSSL_VERIFY_MODE: $CHATWOOT_SMTP_OPENSSL_VERIFY_MODE
+    DISABLE_TELEMETRY: true
+
+services:
+  chatwoot-migrate:
+    <<: *base
+    container_name: chatwoot-migrate
+    volumes:
+      - chatwoot:/app/storage
+    command: ["bundle", "exec", "rails", "db:chatwoot_prepare"]
+    networks:
+      - postgres
+      - chatwoot
+    depends_on:
+      redis-chatwoot-cache:
+        condition: service_started
+    deploy:
+      restart_policy:
+        condition: none
+
+  chatwoot-worker:
+    <<: *base
+    container_name: chatwoot-worker
+    volumes:
+      - chatwoot:/app/storage
+    command: ["bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml"]
+    networks:
+      - postgres
+      - chatwoot
+    depends_on:
+      chatwoot:
+        condition: service_started
+    deploy:
+      restart_policy:
+        condition: none
+
+  chatwoot:
+    <<: *base
+    container_name: chatwoot
+    volumes:
+      - chatwoot:/app/storage
+    entrypoint: docker/entrypoints/rails.sh
+    command: ["bundle", "exec", "rails", "s", "-p", "3333", "-b", "0.0.0.0"]
+    networks:
+      - postgres
+      - chatwoot
+    ports:
+      - ${CHATWOOT_PORT}:${CHATWOOT_PORT}
+    depends_on:
+      chatwoot-migrate:
+        condition: service_completed_successfully
+    deploy:
+      restart_policy:
+        condition: none
+
+  redis-chatwoot-cache:
+    image: redis:$REDIS_VERSION
+    container_name: redis-chatwoot
+    volumes:
+      - redis-cache:/data
+    networks:
+      - chatwoot
+    expose:
+      - 6379
+    deploy:
+      restart_policy:
+        condition: none

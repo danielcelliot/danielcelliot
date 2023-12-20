@@ -1,0 +1,75 @@
+name: medusajs
+
+networks:
+  lan:
+    external: true
+    name: lan
+  medusajs:
+    external: true
+    name: medusajs_external
+  redis:
+    external: true
+    name: redis_external
+
+volumes:
+  medusajs:
+    name: medusajs_data
+  redis:
+    name: redis_data
+
+services:
+  whoami:
+    image: traefik/whoami
+    container_name: whoami
+    ports:
+      - 7355:80
+    networks:
+      - lan
+
+  medusajs:
+    init: true
+    image: danielcelliot.azurecr.io/medusajs:1.18-debian
+    container_name: medusajs
+    volumes:
+      - medusajs:/app/medusa
+    environment:
+      NODE_ENV: $NODE_ENV
+      NPM_CONFIG_PRODUCTION: $NPM_CONFIG_PRODUCTION
+      BACKEND_URL: $BACKEND_URL
+      ADMIN_CORS: $ADMIN_CORS
+      STORE_CORS: $STORE_CORS
+      DATABASE_TYPE: $DATABASE_TYPE
+      DATABASE_URL: $DATABASE_URL
+      REDIS_URL: $REDIS_URL
+      MEILISEARCH_HOST: $MEILISEARCH_HOST
+      MEILISEARCH_API_KEY: $MEILISEARCH_API_KEY
+      GOOGLE_CLIENT_ID: $GOOGLE_CLIENT_ID
+      GOOGLE_CLIENT_SECRET: $GOOGLE_CLIENT_SECRET
+      FACEBOOK_CLIENT_ID: $FACEBOOK_CLIENT_ID
+      FACEBOOK_CLIENT_SECRET: $FACEBOOK_CLIENT_SECRET
+      JWT_SECRET: $JWT_SECRET
+      COOKIE_SECRET: $COOKIE_SECRET
+    networks:
+      - medusajs
+      - redis
+    ports:
+      - 9000:9000
+    depends_on:
+      redis:
+        condition: service_started
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+  redis:
+    image: redis:7.2.1-alpine
+    container_name: redis
+    volumes:
+      - redis:/data
+    networks:
+      - redis
+    expose:
+      - 6379
+    deploy:
+      restart_policy:
+        condition: on-failure

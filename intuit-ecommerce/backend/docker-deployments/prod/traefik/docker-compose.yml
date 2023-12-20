@@ -1,0 +1,43 @@
+#
+name: traefik
+
+networks:
+  public:
+    external: true
+    name: public
+
+services:
+  traefik:
+    image: traefik:v2.10
+    container_name: traefik
+    command:
+      - --api=true
+      - --api.insecure=false
+      - --api.dashboard=true
+      - --global.sendAnonymousUsage=false
+      - --providers.docker
+      - --providers.docker.exposedByDefault=false
+      - --entrypoints.web.address=80
+      - --entrypoints.websecure.address=80
+      - --entrypoints.proxy.address=8080
+      - --log.level=ERROR
+    ports:
+      - 80:80
+      - 443:443
+      - 8080:8080
+    networks:
+      - public
+    labels:
+      traefik.enable: true
+      traefik.http.routers.traefik-dashboard.entrypoints: proxy
+      traefik.http.routers.traefik-dashboard.rule: Host(`${BASE_URL}`)
+      traefik.http.routers.traefik-dashboard.service: api@internal
+      traefik.http.routers.traefik-dashboard.middlewares: admin-basic-auth
+      traefik.http.middlewares.admin-basic-auth.basicauth.usersFile: ${BASIC_AUTH_FILENAME}
+      traefik.http.services.traefik-dashboard.loadbalancer.server.port: 8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./config/${BASIC_AUTH_FILENAME}:/${BASIC_AUTH_FILENAME}
+    deploy:
+      restart_policy:
+        condition: on-failure

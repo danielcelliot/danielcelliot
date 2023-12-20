@@ -1,0 +1,101 @@
+x-depends-on-configurator: &depends_on_configurator
+  depends_on:
+    erpnext-configurator:
+      condition: service_completed_successfully
+
+x-backend-defaults: &erpnext_defaults
+  <<: *depends_on_configurator
+  image: intuit/erpnext-hrms:v14
+
+services:
+  erpnext-configurator:
+    <<: *erpnext_defaults
+    container_name: ${ERPNEXT_HOST_NAME}-configurator
+    environment:
+      DB_HOST: ${MARIADB_HOST_NAME}
+      DB_PORT: ${MARIADB_PORT}
+      REDIS_CACHE: redis:${REDIS_PORT}${ERPNEXT_CACHE_PATH}
+      REDIS_QUEUE: redis:${REDIS_PORT}${ERPNEXT_QUEUE_PATH}
+      REDIS_SOCKETIO: redis:${REDIS_PORT}${ERPNEXT_SOCKETIO_PATH}
+      SOCKETIO_PORT: ${ERPNEXT_WEBSOCKET_PORT}
+    entrypoint:
+      - bash
+      - -c
+    command:
+      - >
+        bench set-config -g db_host $$DB_HOST;
+        bench set-config -gp db_port $$DB_PORT;
+        bench set-config -g redis_cache "redis://$$REDIS_CACHE";
+        bench set-config -g redis_queue "redis://$$REDIS_QUEUE";
+        bench set-config -g redis_socketio "redis://$$REDIS_SOCKETIO";
+        bench set-config -gp socketio_port $$SOCKETIO_PORT;
+    depends_on: {}
+
+  erpnext-websocket:
+    <<: *erpnext_defaults
+    container_name: ${ERPNEXT_HOST_NAME}-websocket
+    command:
+      - node
+      - /home/frappe/frappe-bench/apps/frappe/socketio.js
+
+  erpnext-backend:
+    <<: *erpnext_defaults
+    container_name: ${ERPNEXT_HOST_NAME}-backend
+
+  erpnext-frontend:
+    <<: *erpnext_defaults
+    image: frappe/erpnext:${ERPNEXT_VERSION}
+    container_name: ${ERPNEXT_HOST_NAME}-frontend
+    environment:
+      BACKEND: ${ERPNEXT_HOST_NAME}-backend:${ERPNEXT_BACKEND_PORT}
+      SOCKETIO: ${ERPNEXT_HOST_NAME}-websocket:${ERPNEXT_WEBSOCKET_PORT}
+    command:
+      - nginx-entrypoint.sh
+    depends_on:
+      - ${ERPNEXT_HOST_NAME}-backend
+      - ${ERPNEXT_HOST_NAME}-websocket
+
+  erpnext-queue-short:
+    <<: *erpnext_defaults
+    container_name: ${ERPNEXT_HOST_NAME}-queue-short
+    command: bench worker --queue short
+
+  erpnext-queue-default:
+    <<: *erpnext_defaults
+    container_name: ${ERPNEXT_HOST_NAME}-queue-default
+    command: bench worker --queue default
+
+  erpnext-queue-long:
+    <<: *erpnext_defaults
+    container_name: ${ERPNEXT_HOST_NAME}-queue-long
+    command: bench worker --queue long
+
+  erpnext-scheduler:
+    <<: *erpnext_defaults
+    container_name: ${ERPNEXT_HOST_NAME}-scheduler
+    command: bench schedule
+
+  # erpnext-create-site:
+  #   <<: *erpnext_defaults
+  #   container_name: ${ERPNEXT_HOST_NAME}-create-site
+  #   entrypoint:
+  #     - bash
+  #     - -c
+  #   command:
+  #     - >
+  #       wait-for-it -t 120 mariadb:3306;
+  #       wait-for-it -t 120 redis:6379;
+  #       export start=`date +%s`;
+  #       until [[ -n `grep -hs ^ sites/common_site_config.json | jq -r ".db_host // empty"` ]] && \
+  #         [[ -n `grep -hs ^ sites/common_site_config.json | jq -r ".redis_cache // empty"` ]] && \
+  #         [[ -n `grep -hs ^ sites/common_site_config.json | jq -r ".redis_queue // empty"` ]];
+  #       do
+  #         echo "Waiting for sites/common_site_config.json to be created";
+  #         sleep 5;
+  #         if (( `date +%s`-start > 120 )); then
+  #           echo "could not find sites/common_site_config.json with required keys";
+  #           exit 1
+  #         fi
+  #       done;
+  #       echo "sites/common_site_config.json found";
+  #       bench new-site erp.localhost --no-mariadb-socket --admin-password=admin --db-root-password=fortunecookie --install-app erpnext --set-default;

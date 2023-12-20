@@ -1,0 +1,15 @@
+#
+services:
+  loki:
+    image: grafana/loki:${LOKI_VERSION}
+    container_name: ${LOKI_HOST_NAME}
+    command: -config.file=/etc/loki/loki.yml
+
+  promtail:
+    image: grafana/promtail:${LOKI_VERSION}
+    container_name: ${GRAFANA_HOST_NAME}-promtail
+    command: -config.file=/etc/promtail/promtail.yml
+
+  grafana:
+    image: grafana/grafana:${GRAFANA_VERSION}
+    container_name: ${GRAFANA_HOST_NAME}

@@ -1,0 +1,150 @@
+version: v0.11.1
+
+log:
+  level: info
+  format: text
+  leak_sensitive_values: true   # Change this to false in production
+
+secrets:
+  cookie:
+    - PLEASE-CHANGE-ME-I-AM-VERY-INSECURE     # Reminder to change for production
+  cipher:
+    - 32-LONG-SECRET-NOT-SECURE-AT-ALL        # This too!
+
+session:
+  # lifespan: 1h
+  cookie:
+    name: caribay_sc
+    persistent: true
+  # earliest_possible_extend: 2m
+
+ciphers:
+  algorithm: xchacha20-poly1305
+
+hashers:
+  algorithm: argon2
+  argon2:
+    iterations: 3
+    memory: 64MB
+    parallelism: 4
+    key_length: 32
+    salt_length: 16
+    expected_duration: 500ms
+    expected_deviation: 500ms
+    dedicated_memory: 512MB
+
+dsn: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST_NAME}:${POSTGRES_PORT}/${KRATOS_DB_NAME}?sslmode=disable&max_conns=20&max_idle_conns=4
+
+identity:
+  default_schema_id: customer_v1
+  schemas:
+    - id: customer_v1
+      url: file:///etc/config/kratos/customer.schema.json
+
+serve:
+  public:
+    base_url: http://localhost:4433
+    cors:
+      enabled: true
+      debug: true
+  admin:
+    base_url: http://localhost:4434
+
+selfservice:
+  default_browser_return_url: http://localhost:3000
+  allowed_return_urls:
+    - http://localhost:3000
+  methods:
+    profile:
+      enabled: true
+    password:
+      enabled: true
+      config:
+        haveibeenpwned_enabled: true
+        haveibeenpwned_host: api.pwnedpasswords.com
+        max_breaches: 0
+        ignore_network_errors: true
+        min_password_length: 6
+        identifier_similarity_check_enabled: true
+    code:
+      enabled: true
+      # config:
+      #   lifespan: 24h
+    link:
+      enabled: true
+      # config:
+      #   lifespan: 24h
+    totp:
+      enabled: false
+      config:
+        issuer: caribay.tt
+    lookup_secret:
+      enabled: false
+    webauthn:
+      enabled: false
+    oidc:
+      enabled: false
+
+  flows:
+    login:
+      ui_url: http://localhost:3000/accounts/signin
+      # lifespan: 15m
+    logout:
+      after:
+        default_browser_return_url: http://localhost:3000
+    registration:
+      ui_url: http://localhost:3000/accounts/register
+      # lifespan: 15m
+      after:
+        default_browser_return_url: http://localhost:3000
+        password:
+          hooks:
+            - hook: session
+            # - hook: web_hook
+            #   config:
+            #     url: http://host.docker.internal:3000/api/customer
+            #     method: POST
+            #     can_interrupt: false
+            #     auth:
+            #       type: basic_auth
+            #       config:
+            #         user: intuit
+            #         password: fakepassword
+            #     body: file:///etc/config/kratos/registration.jsonnet
+            #     response:
+            #       ignore: true
+    settings:
+      ui_url: http://localhost:3000/account/profile
+      # privileged_session_max_age: 15m
+      required_aal: highest_available
+      after:
+        default_browser_return_url: http://localhost:3000/account/profile
+    recovery:
+      enabled: true
+      ui_url: http://localhost:3000/accounts/recover
+      use: code
+      # lifespan: 15m
+      after:
+        hooks:
+          - hook: revoke_active_sessions
+    verification:
+      enabled: true
+      ui_url: http://localhost:3000/accounts/verify
+      use: link
+      # lifespan: 15m
+      after:
+        default_browser_return_url: http://localhost:3000/accounts/signin
+    error:
+      ui_url: http://localhost:3000/error
+
+# oauth2_provider:
+#   url: http://hydra:4445
+  # headers: 
+  #   Authorization: Bearer some-token
+
+courier:
+  smtp:
+    connection_uri: smtp://mailhog:1026/?disable_starttls=true
+
+# feature_flags:
+#   cacheable_sessions: true    # Only effective on the Ory Network :-(

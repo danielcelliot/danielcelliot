@@ -1,0 +1,39 @@
+x-env-vars: &env-vars
+  environment:
+    STOREFRONT_URL: ${STOREFRONT_URL}
+    DASHBOARD_URL: ${SALEOR_DASHBOARD_URL}
+    MEDIA_URL: ${SALEOR_MEDIA_URL}
+    ALLOWED_HOSTS: ${SALEOR_ALLOWED_HOSTS}
+    DEFAULT_FROM_EMAIL: noreply@caribay.tt
+    EMAIL_URL: ${MAILHOG_SMTP_URL}:${MAILHOG_SERVICE_PORT}
+    DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST_NAME}:${POSTGRES_PORT}/${SALEOR_DB_NAME}
+    CACHE_URL: ${REDIS_URL}:${REDIS_PORT}/0
+    CELERY_BROKER_URL: ${REDIS_URL}:${REDIS_PORT}/1
+    SECRET_KEY: ${SALEOR_SECRET_KEY}
+    JWT_TTL_ACCESS: 30m
+
+services:
+  saleor:
+    <<: *env-vars
+    container_name: ${SALEOR_HOST_NAME}
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:${SALEOR_PORT} --noreload"
+
+  saleor-worker:
+    <<: *env-vars
+    container_name: ${SALEOR_HOST_NAME}-worker
+    command: celery -A saleor --app=saleor.celeryconf:app worker --loglevel=info -B
+
+  # jaeger:
+  #   image: jaegertracing/all-in-one
+  #   container_name: jaeger
+  #   ports:
+  #     - "5775:5775/udp"
+  #     - "6831:6831/udp"
+  #     - "6832:6832/udp"
+  #     - "5778:5778"
+  #     - "16686:16686"
+  #     - "14268:14268"
+  #     - "9411:9411"
+  #   restart: unless-stopped
+  #   networks:
+  #     - backend_intranet

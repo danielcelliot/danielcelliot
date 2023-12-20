@@ -1,0 +1,30 @@
+#
+name: meilisearch
+
+networks:
+  meilisearch:
+    external: true
+    name: meilisearch_external
+
+volumes:
+  meilisearch:
+    name: meili_data
+
+services:
+  meilisearch:
+    image: getmeili/meilisearch:v1.5
+    container_name: meilisearch
+    environment:
+      - MEILI_ENV=production
+      - MEILI_NO_ANALYTICS
+      - MEILI_LOG_LEVEL=INFO
+      - MEILI_MASTER_KEY=$MEILISEARCH_MASTER_KEY
+    ports:
+      - 7700:7700
+    networks:
+      - meilisearch
+    volumes:
+      - meilisearch:/meili_data
+    deploy:
+      restart_policy:
+        condition: on-failure

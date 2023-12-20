@@ -1,0 +1,53 @@
+version: v2.1.1
+
+dsn: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST_NAME}:${POSTGRES_PORT}/${HYDRA_DB_NAME}?sslmode=disable&max_conns=20&max_idle_conns=4
+
+log:
+  level: info
+  format: text
+  leak_sensitive_values: true
+
+oauth2:
+  expose_internal_errors: true
+
+secrets:
+  cookie:
+    - youReallyNeedToChangeThis
+  system:
+    - youReallyNeedToChangexhis
+
+serve:
+  cookies:
+    names:
+      login_csrf: caribay_l_csrf
+      consent_csrf: caribay_c_csrf
+      session: caribay_o_sc
+    # same_site_mode: Lax
+
+# ttl:
+#   access_token: 1h
+#   refresh_token: 1h
+#   id_token: 1h
+#   auth_code: 15m
+
+# strategies:
+#   access_token: jwt
+
+oidc:
+  subject_identifiers:
+    supported_types:
+      - public
+      - pairwise  # The pairwise subject identifier algorithm is not supported by the JWT OAuth 2.0 Access Token Strategy
+    pairwise:
+      salt: youReallyNeedToChangeThis
+
+urls:
+  login: http://localhost:3000/accounts/signin
+  logout: http://localhost:3000/accounts/signout
+  post_logout_redirect: http://localhost:3000
+  consent: http://localhost:3000/api/auth/consent
+  error: http://localhost:3000/error
+  self:
+    admin: http://localhost:4445/
+    public: http://localhost:4444/
+    issuer: http://localhost:4444/

@@ -1,0 +1,306 @@
+/*----------------------------------------------
+--Variables
+-----------------------------------------------  */
+:root {
+    /* Media Queries */
+    --mq-xsmall: 22em;
+    --mq-small: 36em;
+    --mq-med: 58em;
+    --mq-large: 86em;
+    --mq-xlarge: 115em;
+    --mq-xxlarge: 125em;
+    --mq-xxxlarge: 145em;
+
+    /* Line Height */
+    --main-lineheight: 1.9;
+
+    /* Font Header */
+    --font-header: 'Metropolis', sans-serif;
+
+    /* Font paragraph */
+    --font-paragraph: 'Metropolis', sans-serif;
+
+    /* Colours */
+    --main-bg-colour: #F1F2F3;
+    --main-font-colour: #333333;
+
+    --about-colour: #FF4136;
+    --about-colour-light: #FF635B;
+    --about-colour-dark: #B40A01;
+
+    --career-colour: #0074D9;
+    --career-colour-light: #098AFF;
+    --career-colour-dark: #00427D;
+
+    --personal-colour: #00CB58;
+    --personal-colour-light: #32FF8B;
+    --personal-colour-dark: #00CB58;
+
+    --projects-colour: #B10DC9;
+    --projects-colour-light: #BC33CF;
+    --projects-colour-dark: #710280;
+
+    --twitter-colour: #28AAE1;
+    --reddit-colour: #FF4500;
+    --youtube-colour: #FF0000;
+    --github-colour: #A047AC;
+}
+
+
+/*----------------------------------------------
+--Media queries
+-----------------------------------------------  */
+/* @media (min-width: 36em) {
+    body {
+        font-size: 110%;
+    }
+} */
+
+/* @media (min-width: 58em) {
+    body {
+        font-size: 120%;
+    }
+} */
+
+/* @media (min-width: 86em) {
+    body {
+        font-size: 130%;
+    }
+} */
+
+/* @media (min-width: 115em) {
+    body {
+        font-size: 160%;
+    }
+} */
+
+/* @media (min-width: 125em) {
+    body {
+        font-size: 170%;
+    }
+} */
+
+/* @media (min-width: 145em) {
+    body {
+        font-size: 180%;
+    }
+} */
+
+
+/*----------------------------------------------
+--Setup
+-----------------------------------------------  */
+*,
+*::before,
+*::after
+{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    /* outline: 1px solid blue; */
+}
+
+html,
+body
+{
+    width: 100%;
+}
+
+html {
+    font-size: 100%;
+}
+
+body {
+    background-color: rgba(0, 0, 0, .25);
+    backdrop-filter: blur(7px);
+    background-blend-mode: multiply;
+    background-image: url(../img/bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: var(--main-font-colour);
+    font-family: var(--font-paragraph);
+    font-style: normal;
+    font-weight: normal;
+    height: 100vh;
+    overflow: hidden;
+
+    -webkit-transition: background-color 2s ease-out;
+    -moz-transition: background-color 2s ease-out;
+    -o-transition: background-color 2s ease-out;
+    transition: background-color 2s ease-out;
+}
+
+
+/*----------------------------------------------
+--Font styling
+-----------------------------------------------  */
+h1,
+h2,
+h3
+{
+    font-family: var(--font-header);
+}
+
+h1 {
+    /* font-size: 2.5em; */
+    /* line-height: 1.2em; */
+    /* margin-top: 0.8em; */
+    /* margin-bottom: 0.4em; */
+}
+
+h2 {
+    /* font-size: 2.6em; */
+    /* line-height: 1.3em; */
+    /* margin-bottom: 0.6em; */
+    /* margin-top: 1.3em; */
+}
+
+h3 {
+    /* font-size: 2.1em; */
+    /* line-height: 1em; */
+    /* margin-bottom: 1em; */
+    /* margin-top: 1em; */
+}
+
+p {
+    font-family: var(--font-paragraph);
+    /* line-height: var(--base-lineheight); */
+    /* margin-bottom: 1.7em; */
+    /* margin-top: 1.7em; */
+}
+
+
+/*----------------------------------------------
+--Images
+-----------------------------------------------  */
+/* img,
+object,
+embed
+{
+    height:auto;
+    max-width:100%;
+} */
+
+/* img {
+    border: 0;
+    max-width: 100%;
+    width: 100%;
+} */
+
+/* figure {
+    margin: 1em 0;
+} */
+
+
+/*----------------------------------------------
+--Layout
+-----------------------------------------------  */
+.invisible {
+    opacity: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+.container {
+    height: 100vh;
+    margin: 0 auto;
+    position: relative;
+    width: 60%;
+}
+
+.view-area {
+    border:rgba(255, 255, 255, 0.008) solid 1rem;
+    background-color: rgba(255, 255, 255, .8);
+    /* backdrop-filter: blur(1px); */
+    /* border-radius: 2rem; */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+	height: 80%;
+    overflow: hidden;
+    position: absolute;
+    top: 11%;
+    width: 100%;
+    /* outline: 1px solid yellowgreen; */
+}
+
+
+/*----------------------------------------------
+--Footer
+-----------------------------------------------  */
+footer {
+    align-items: center;
+    bottom: 0;
+    display: flex;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    line-height: 1.4em;
+    margin-bottom: 1.1em;
+    position: absolute;
+    width: 100%;
+}
+
+.my-name {
+    font-family: var(--font-header);
+    font-size: 2em;
+    letter-spacing: 0.002em;
+}
+
+.my-name .font-light {
+    font-weight: 300;
+}
+.my-name .font-heavy {
+    font-weight: 900;
+}
+
+.social-media {
+    list-style: none;
+}
+
+.social-media li {
+    display: inline-block;
+    padding-left: 0.3em;
+    padding-right: 0.3em;
+}
+
+.social-media svg,
+.social-media svg path
+{
+    transition-timing-function: ease-in-out;
+}
+
+.social-media svg {
+    transition-duration: 200ms;
+    transition-property: transform;
+    vertical-align: middle;
+    width: 1.3em;
+}
+.social-media svg:hover {
+    cursor: pointer;
+    transform: scale(1.3);
+}
+
+.social-media svg path {
+    fill: var(--main-font-colour);
+    transition-duration: 200ms;
+    transition-property: fill;
+}
+
+.social-media .svg-twitter:hover > path {
+    fill: var(--twitter-colour);
+}
+.social-media .svg-reddit:hover > path {
+    fill: var(--reddit-colour);
+}
+.social-media .svg-youtube:hover > path {
+    fill: var(--youtube-colour);
+}
+.social-media .svg-github:hover > path {
+    fill: var(--github-colour);
+}
+.social-media .svg-codepen:hover > path {
+    fill: lightgray;
+}

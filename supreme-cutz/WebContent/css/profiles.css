@@ -1,0 +1,123 @@
+.profiles-wrapper {
+    width: 55%;
+    margin: 2% auto 0 auto;
+    padding: 3em;
+    display: flex;
+    flex-direction: column;
+}
+
+.profiles-info {
+    display: inline-block;
+}
+
+.profiles-info, .profiles-gallery, .profiles-social {
+    margin-bottom: 3em;
+}
+
+.portrait {
+    float: left;
+    margin-right: 2em;
+    margin-bottom: 1em;
+    width: max-content;
+    height: max-content;
+}
+
+.profiles-text {
+    /* padding: 2em; */
+    float: none;
+}
+
+.profiles-text p span {
+    color: rgba(255,255,255,0.4);
+}
+
+.profiles-text p:first-of-type {
+    /* margin-bottom: 25px; */
+    font-size: 140%;
+    letter-spacing: 4px;
+    line-height: 1.2;
+    display: contents;
+}
+
+.profiles-text p:first-of-type span {
+    letter-spacing: initial;
+    font-weight: bold;
+}
+
+.profiles-text p {
+    margin-bottom: .5em;
+    line-height: 2;
+    font-size: 105%;
+    font-weight: 400;
+}
+
+.profiles-text a {
+    display: flex;
+    background-color: rgba(255,255,255,0.4);
+    font-size: 12px;
+    margin-top: 0;
+    text-decoration: none;
+    margin: 12px 0;
+    width: max-content;
+    color: #1F2223;
+    padding: 0.5em 1.5em;
+    transition: all 250ms ease-in-out;
+}
+.profiles-text a:hover {
+    background-color: rgba(255,255,255,0.6);
+}
+
+.profiles-text a .fas {
+    padding: 0 0.85em 0 0;
+}
+
+.profiles-gallery span, .profiles-social span {
+    font-weight: bold;
+    /* padding-bottom: 2em; */
+    letter-spacing: 4px;
+}
+
+.m-p-g {
+    margin: 0;
+}
+
+.m-p-g, .social-links {
+    margin: 3% 0;
+}
+
+.fa-instagram-square, .fa-twitter-square, .fa-linkedin {
+    font-size: 300%;
+    margin-right: 2%;
+    transition: all 250ms ease-in-out;
+}
+.fa-instagram-square:hover, .fa-twitter-square:hover, .fa-linkedin:hover {
+    cursor: pointer;
+}
+
+.fa-instagram-square {
+    color: rgb(245,96,64);
+}
+.fa-instagram-square:hover {
+    color: rgba(245,96,64,0.6);
+}
+
+.fa-twitter-square {
+    color: rgb(29,161,242);
+}
+.fa-twitter-square:hover {
+    color: rgba(29,161,242,0.6);
+}
+
+.fa-linkedin {
+    color: rgba(40,103,178);
+}
+.fa-linkedin:hover {
+    color: rgba(40,103,178,0.6);
+}
+
+/* (1366x768) WXGA Display */
+@media  screen and (max-width: 1366px) {
+    .profiles-wrapper {
+        width: 70%;
+    }
+}

@@ -1,0 +1,5 @@
+services:
+  portainer:
+    image: portainer/portainer-ce:${PORTAINER_VERSION}
+    container_name: ${PORTAINER_HOST_NAME}
+    command: -H unix:///var/run/docker.sock

@@ -1,0 +1,39 @@
+#
+name: imgproxy
+
+networks:
+  imgproxy:
+    external: true
+    name: imgproxy_external
+
+services:
+  imgproxy:
+    image: darthsim/imgproxy:latest
+    container_name: imgproxy
+    ports:
+      - 80:8080
+    networks:
+      - imgproxy
+    environment:
+      - IMGPROXY_ENABLE_AVIF_DETECTION=true
+      - IMGPROXY_ENABLE_WEBP_DETECTION=true
+      - IMGPROXY_ENABLE_CLIENT_HINTS=true
+      - IMGPROXY_DEVELOPMENT_ERRORS_MODE=true # change to false after testing
+
+      - IMGPROXY_KEY=$IMGPROXY_KEY
+      - IMGPROXY_SALT=$IMGPROXY_SALT
+
+      - IMGPROXY_USE_S3=true
+      - IMGPROXY_S3_ENDPOINT=$IMGPROXY_S3_ENDPOINT
+      - IMGPROXY_ALLOWED_SOURCES=$IMGPROXY_ALLOWED_SOURCES
+      - IMGPROXY_S3_REGION=us-east-1
+      - IMGPROXY_S3_ASSUME_ROLE_ARN=$AWS_IAM_ROLE_ARN
+      - AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+      - AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+
+      - IMGPROXY_SENTRY_DSN=$IMGPROXY_SENTRY_DSN
+      - IMGPROXY_SENTRY_ENVIRONMENT=$IMGPROXY_SENTRY_ENVIRONMENT
+      - IMGPROXY_SENTRY_RELEASE=$IMGPROXY_SENTRY_RELEASE
+    deploy:
+      restart_policy:
+        condition: on-failure

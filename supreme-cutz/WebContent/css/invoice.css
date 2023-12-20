@@ -1,0 +1,88 @@
+html, body {
+    font-family: verdana,arial,helvetica,sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.logo-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1em;
+}
+.logo-container #logo {
+    width: 11rem;
+}
+
+.container {
+    width: 85%;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 110%;
+    text-align: center;
+    border-bottom: 2px solid black;
+    margin: 0;
+    padding: 0.5em 0;
+}
+
+h2 {
+    font-size: 105%;
+    color: red;
+    text-align: center;
+    margin: 0;
+}
+
+#print {
+    text-align: center;
+    display: block;
+}
+
+.order-wrapper {
+    border: 2px solid black;
+    padding: 0 1%;
+}
+
+.order-heading {
+    display: flex;
+    justify-content: space-between;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.shipping-wrapper {
+    border: 2px solid black;
+    padding: 0 1%;
+    margin-top: .5%;
+}
+
+.payment-wrapper {
+    border: 2px solid black;
+    margin-top: .5%;
+    padding: 0 1%;
+}
+
+.payment-wrapper > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.payment-wrapper .col-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.payment-wrapper .col-right p {
+    margin: 0;
+}
+.payment-wrapper .col-right p span {
+    margin-left: 10px;
+}
+
+.footer {
+    text-align: center;
+}

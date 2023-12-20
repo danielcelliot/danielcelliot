@@ -1,0 +1,142 @@
+main {
+    display: initial;
+    overflow-x: hidden;
+    position: relative;
+    perspective: 1px;
+}
+.container {
+    height: 100vh;
+}
+
+.scrolldown {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+
+    transform: translateY(-80px) translateX(-50%) rotate(45deg);
+}
+.scrolldown span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-bottom: 2px solid #ffffff;
+    border-right: 2px solid #ffffff;
+    animation: animate 1.5s linear infinite;
+    opacity: 0;
+}
+.scrolldown span:nth-child(1) {
+    transform: translate(-15px, -15px);
+    animation-delay: -0.4s;
+}
+.scrolldown span:nth-child(2) {
+    transform: translate(0, 0);
+    animation-delay: -0.2s;
+}
+.scrolldown span:nth-child(3) {
+    transform: translate(15px, 15px);
+    animation-delay: 0s;
+}
+
+@keyframes animate {
+    0% {
+        top: -5px;
+        left: -5px;
+        opacity: 0;
+    }
+    25% {
+        top: 0px;
+        left: 0px;
+        opacity: 1;
+    }
+    50%, 100% {
+        top: 5px;
+        left: 5px;
+        opacity: 0;
+    }
+}
+
+.parallax-wrapper, .parallax-wrapper-1 {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.parallax-wrapper::before, .parallax-wrapper-1::before {
+    content: "";
+    width: 100vw;
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    z-index: -1;
+    transform: translateZ(-1px) scale(2);
+    background-blend-mode: multiply;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.parallax-wrapper::before {
+    background-image: url(../img/barber-shop/1207_barber-shop-africa03-1000x666.jpg);
+}
+.parallax-wrapper-1::before {
+    background-image: url(../img/barber-shop/pexels-photo-1453005.webp);
+}
+
+.regular-wrapper, .regular-wrapper-1 {
+    width: 100vw;
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    position: absolute;
+    z-index: 2;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background-blend-mode: multiply;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+.regular-wrapper {
+    background-image: url(../img/barber-shop/pexels-photo-1570806.webp);
+}
+.regular-wrapper-1 {
+    background-image: url(../img/barber-shop/gray-hand-barber-tool-kit-1574949944274.jpg);
+}
+
+.content {
+    padding: 1em;
+    background: #181A1B;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.details {
+    z-index: 2;
+    position: relative;
+    background: #181A1B;
+    width: 100%;
+    padding: 6em 0;
+}
+.details p {
+    line-height: 2em;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.content h1 {
+    text-align: center;
+    text-transform: uppercase;
+}
+.content h1::after {
+    content: '';
+    display: block;
+    height: 3px;
+    background: red;
+    margin-bottom: 0.05em;
+}

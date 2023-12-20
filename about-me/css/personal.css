@@ -1,0 +1,32 @@
+@import './pages.css';
+
+/*----------------------------------------------   
+--About page
+-----------------------------------------------  */
+.btn--back {
+    background: var(--personal-colour);
+}
+.btn--back:hover {
+    background: var(--personal-colour-light);
+}
+
+.page-header::after
+{
+    background: var(--personal-colour);
+}
+
+.heading {
+    color: var(--personal-colour);
+}
+
+.logos-container {
+    top: 62%;
+}
+
+.logos-container li {
+    flex: 0 0 21%;
+}
+
+.logos-item img {
+    height: 65px;
+}
