@@ -6,13 +6,13 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>tt.intuit</groupId>
+    <groupId>tt.caribay</groupId>
     <artifactId>webstore</artifactId>
     <version>0.3.0</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <groupId>tt.intuit.webstore</groupId>
+  <groupId>tt.caribay.webstore</groupId>
   <artifactId>shop</artifactId>
   <version>0.3.0</version>
 
@@ -37,7 +37,7 @@
   <dependencies>
 
     <dependency>
-      <groupId>tt.intuit.webstore</groupId>
+      <groupId>tt.caribay.webstore</groupId>
       <artifactId>common</artifactId>
       <version>0.3.0</version>
     </dependency>
@@ -222,7 +222,7 @@
                   <unsignedTypes>false</unsignedTypes>
                 </database>
                 <target>
-                  <packageName>tt.intuit.webstore.db</packageName>
+                  <packageName>tt.caribay.webstore.db</packageName>
                   <directory>${jooq.outputdir}</directory>
                 </target>
                 <generate>

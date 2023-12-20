@@ -9,5 +9,5 @@ Timeframe: 2 weeks
 Technologies used:
 
 - HTML
-- CSS3 (no libraries or CSS frameworks used)
-- Javascript (no libraries used)
+- CSS3 (**no** libraries or CSS frameworks used)
+- Javascript (**no** libraries used)

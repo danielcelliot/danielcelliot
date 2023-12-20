@@ -1,14 +1,14 @@
 # Caribay Management System
 
-CMS is a work-in-progress inventory management application, designed for e-commerce and Point-of-Sale systems.
+CMS is a work-in-progress inventory management application, designed for E-Commerce and Point-of-Sale systems.
 
 Technologies used:
 Backend:
 
-- Quarkus framework (Java)
-- MariaDB Database
+- [Quarkus](https://quarkus.io/) framework (Java)
+- [MariaDB](https://mariadb.org/) Database
 
 Frontend:
 
-- Svelte
-- TailwindCSS
+- [Svelte](https://svelte.dev/)
+- [TailwindCSS](https://tailwindcss.com/)

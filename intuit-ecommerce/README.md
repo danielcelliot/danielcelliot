@@ -6,10 +6,10 @@ Technologies used:
 Backend:
 
 - Mutiple containerized (Docker) open-source services
-- Amazon RDS Postgresql database
+- Amazon [`AWS RDS Postgresql`](https://aws.amazon.com/rds/) database
 
 Frontend:
 
-- SvelteKit
-- Typescript
-- TailwindCSS
+- [SvelteKit](https://kit.svelte.dev/) (NodeJS)
+- [Typescript](https://www.typescriptlang.org/)
+- [TailwindCSS](https://tailwindcss.com/)
