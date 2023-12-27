@@ -12,9 +12,11 @@ A WIP E-commerce platform, built using modern open-source technologies and Jamst
 - TailwindCSS
 - AWS services (EC2, CloudFront, RDS, S3)
 
-<img src='/intuit-ecommerce/images/homepage.gif' width='200'>
-<img src='/intuit-ecommerce/images/find-product.gif' width='200'>
-<img src='/intuit-ecommerce/images/shopping-bag.gif' width='200'>
+<p align='middle'>
+  <img src='/intuit-ecommerce/images/homepage.gif' width='200'>
+  <img src='/intuit-ecommerce/images/find-product.gif' width='200'>
+  <img src='/intuit-ecommerce/images/shopping-bag.gif' width='200'>
+</p>
 
 ---
 
