@@ -20,12 +20,11 @@ A WIP E-commerce platform, built using modern open-source technologies and Jamst
 
 <p align='middle'>
   <img src='/intuit-ecommerce/images/checkout.gif' width='200'>
-  <img src='/intuit-ecommerce/images/sign-in.gif' width='200'>
   <img src='/intuit-ecommerce/images/admin-dashboard.gif' width='200'>
+  <img src='/intuit-ecommerce/images/admin-fulfillment.gif' width='200'>
 </p>
 
 <p align='middle'>
-  <img src='/intuit-ecommerce/images/admin-fulfillment.gif' width='200'>
   <img src='/intuit-ecommerce/images/admin-modify-product.gif' width='200'>
   <img src='/intuit-ecommerce/images/admin-product-wizard.gif' width='200'>
 </p>
