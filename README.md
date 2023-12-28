@@ -102,13 +102,13 @@ Technologies used:
   <img src='/about-me/gif/custom-loader.gif' width='400'>
 </p>
 
-#### JavaScript Mouse over events with Custom CSS hover animation
+#### JavaScript "mouseover" events with Custom CSS hover animation
 
 <p align='middle'>
   <img src='/about-me/gif/mouseover-events.gif' width='400'>
 </p>
 
-#### JavaScript on click events with Custom CSS page transitions
+#### JavaScript "on-click" events with Custom CSS page transitions
 
 <p align='middle'>
   <img src='/about-me/gif/page-transitions.gif' width='400'>
