@@ -95,6 +95,12 @@ Technologies used:
 - CSS3
 - vanilla Javascript
 
-<img src='/about-me/gif/custom-loader.gif' width='400'>
-<img src='/about-me/gif/mouseover-events.gif' width='400'>
-<img src='/about-me/gif/page-transitions.gif' width='400'>
+<p align='middle'>
+  <img src='/about-me/gif/custom-loader.gif' width='400'>
+</p>
+<p align='middle'>
+  <img src='/about-me/gif/mouseover-events.gif' width='400'>
+</p>
+<p align='middle'>
+  <img src='/about-me/gif/page-transitions.gif' width='400'>
+</p>
