@@ -13,19 +13,20 @@ Technologies used:
 - TailwindCSS
 - AWS services (EC2, CloudFront, RDS, S3)
 
+#### Storefront
+
 <p align='middle'>
   <img src='/intuit-ecommerce/images/homepage.gif' width='200'>
   <img src='/intuit-ecommerce/images/find-product.gif' width='200'>
   <img src='/intuit-ecommerce/images/shopping-bag.gif' width='200'>
+  <img src='/intuit-ecommerce/images/checkout.gif' width='200'>
 </p>
 
+#### Seller Dashboard
+
 <p align='middle'>
-  <img src='/intuit-ecommerce/images/checkout.gif' width='200'>
   <img src='/intuit-ecommerce/images/admin-dashboard.gif' width='200'>
   <img src='/intuit-ecommerce/images/admin-fulfillment.gif' width='200'>
-</p>
-
-<p align='middle'>
   <img src='/intuit-ecommerce/images/admin-modify-product.gif' width='200'>
   <img src='/intuit-ecommerce/images/admin-product-wizard.gif' width='200'>
 </p>
@@ -95,12 +96,20 @@ Technologies used:
 - CSS3
 - vanilla Javascript
 
+#### Custom CSS Loader
+
 <p align='middle'>
   <img src='/about-me/gif/custom-loader.gif' width='400'>
 </p>
+
+#### JavaScript Mouse over events with Custom CSS hover animation
+
 <p align='middle'>
   <img src='/about-me/gif/mouseover-events.gif' width='400'>
 </p>
+
+#### JavaScript on click events with Custom CSS page transitions
+
 <p align='middle'>
   <img src='/about-me/gif/page-transitions.gif' width='400'>
 </p>
