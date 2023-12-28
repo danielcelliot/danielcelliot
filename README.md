@@ -24,7 +24,7 @@ A WIP E-commerce platform, built using modern open-source technologies and Jamst
   <img src='/intuit-ecommerce/images/admin-product-wizard.gif' width='200'>
 </p>
 
-Built using:
+Technologies used:
 
 - SvelteKit
 - Typescript
