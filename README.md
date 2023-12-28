@@ -7,11 +7,6 @@ This repository includes samples of my code that were used to build academic, pe
 
 A WIP E-commerce platform, built using modern open-source technologies and Jamstack design principles. [Source code](/intuit-ecommerce/)
 
-- SvelteKit
-- Typescript
-- TailwindCSS
-- AWS services (EC2, CloudFront, RDS, S3)
-
 <p align='middle'>
   <img src='/intuit-ecommerce/images/homepage.gif' width='200'>
   <img src='/intuit-ecommerce/images/find-product.gif' width='200'>
@@ -28,6 +23,13 @@ A WIP E-commerce platform, built using modern open-source technologies and Jamst
   <img src='/intuit-ecommerce/images/admin-modify-product.gif' width='200'>
   <img src='/intuit-ecommerce/images/admin-product-wizard.gif' width='200'>
 </p>
+
+Built using:
+
+- SvelteKit
+- Typescript
+- TailwindCSS
+- AWS services (EC2, CloudFront, RDS, S3)
 
 ---
 
