@@ -1,7 +1,7 @@
 👋 Hi, I’m Daniel Elliot. I am a software developer of 2 years and I have over 10 years experience as an IT Technician.<br>
-This repository includes samples of my code that were used to build academic, personal and production applications.
+This repository includes samples of my code that were used to build academic & personal projects.
 
-## Production Projects
+## Personal Projects
 
 ### Intuit E-Commerce
 
@@ -30,10 +30,6 @@ Technologies used:
 - Typescript
 - TailwindCSS
 - AWS services (EC2, CloudFront, RDS, S3)
-
----
-
-## Personal Projects
 
 ### Caribay Management
 
