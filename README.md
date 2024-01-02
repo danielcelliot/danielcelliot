@@ -168,6 +168,10 @@ Built using:
   <img src='/autoserve/gif/05 Clerk login - delete customer.gif' width='400'>
 </p>
 
+<p align='middle'>
+  <img src='/autoserve/erd.jpg' width='800'>
+</p>
+
 ### About Me
 
 A personal portfolio website, with a focus on a visually appealing design and clear visual hierarchy. [Source code](/about-me/)
