@@ -86,6 +86,11 @@ Built using:
 - Javascript
 - MySQL
 
+<p align='middle'>
+  <img src='/supreme-cutz/images/Picture10.png' width='400'>
+  <img src='/supreme-cutz/images/Picture11.png' width='400'>
+</p>
+
 ### Premier Care
 
 A native Windows CRUD application designed for a local clinic, that handles patient records, appointments, treatment, prescriptions and invoicing. [Source code](/premier-care/)
