@@ -111,12 +111,16 @@ A native Windows CRUD application designed for a local clinic, that handles pati
 <br>
 Built using:
 
-- .NET Framework with Windows Forms
+- .NET Framework (C#) with Windows Forms
 - Microsoft SQL Server
 
 <p align='middle'>
-  <img src='/premier-care/images/02. Patient.jpg' width='500'>
-  <img src='/premier-care/images/04. Appointment.jpg' width='500'>
+  <img src='/premier-care/images/ERD.jpg' width='500'>
+</p>
+
+<p align='middle'>
+  <img src='/premier-care/images/02. Patient.jpg' width='400'>
+  <img src='/premier-care/images/04. Appointment.jpg' width='400'>
 </p>
 
 <p align='middle'>
