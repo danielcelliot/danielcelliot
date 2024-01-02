@@ -18,19 +18,25 @@ Technologies used:
 #### Storefront
 
 <p align='middle'>
-  <img src='/intuit-ecommerce/images/homepage.gif' width='200'>
-  <img src='/intuit-ecommerce/images/find-product.gif' width='200'>
-  <img src='/intuit-ecommerce/images/shopping-bag.gif' width='200'>
-  <img src='/intuit-ecommerce/images/checkout.gif' width='200'>
+  <img src='/intuit-ecommerce/images/homepage.gif' width='300'>
+  <img src='/intuit-ecommerce/images/find-product.gif' width='300'>
+</p>
+
+<p align='middle'>
+  <img src='/intuit-ecommerce/images/shopping-bag.gif' width='300'>
+  <img src='/intuit-ecommerce/images/checkout.gif' width='300'>
 </p>
 
 #### Seller Dashboard
 
 <p align='middle'>
-  <img src='/intuit-ecommerce/images/admin-dashboard.gif' width='200'>
-  <img src='/intuit-ecommerce/images/admin-fulfillment.gif' width='200'>
-  <img src='/intuit-ecommerce/images/admin-modify-product.gif' width='200'>
-  <img src='/intuit-ecommerce/images/admin-product-wizard.gif' width='200'>
+  <img src='/intuit-ecommerce/images/admin-dashboard.gif' width='300'>
+  <img src='/intuit-ecommerce/images/admin-fulfillment.gif' width='300'>
+</p>
+
+<p align='middle'>
+  <img src='/intuit-ecommerce/images/admin-dashboard.gif' width='300'>
+  <img src='/intuit-ecommerce/images/admin-fulfillment.gif' width='300'>
 </p>
 
 ### Caribay Management
@@ -39,7 +45,7 @@ An inventory management application, designed for E-Commerce and Point-of-Sale s
 <br>
 Built using:
 
-- Quarkus
+- Quarkus (Java)
 - Svelte
 - TailwindCSS
 - MariaDB
@@ -50,7 +56,7 @@ A command-line shopping bot that monitors the availabilty of specific low-supply
 <br>
 Built using:
 
-- .NET Framework
+- .NET Framework (C#)
 - Selenium
 
 ---
@@ -84,7 +90,7 @@ A Microsoft Access application created to handle scheduling and reservations of 
 A web application designed for a local barbershop, that handles customer appointments and sells hair care products. [Source code](/supreme-cutz/)<br>
 Built using:
 
-- Apache Tomcat
+- Java EE (Apache Tomcat)
 - JavaServer Pages
 - CSS
 - Javascript
@@ -142,10 +148,10 @@ A web application designed for a local auto-mechanic business. Featuring an admi
 <br>
 Built using:
 
-- Apache Tomcat
+- Java EE (Apache Tomcat)
 - JavaServer Pages
 - Bootstrap CSS
-- Javascript
+- Javacript
 - MySQL
 
 <p align='middle'>
