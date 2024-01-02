@@ -68,7 +68,7 @@ Built using:
 A Microsoft Access application created to handle scheduling and reservations of ICT labs by staff members at UTT. [Source code](/ict-lab-scheduler/)
 
 <p align='middle'>
-  <img src='/ict-lab-scheduler/images/calendar.gif' width='600'>
+  <img src='/ict-lab-scheduler/images/calendar.gif' width='650'>
 </p>
 
 <p align='middle'>
