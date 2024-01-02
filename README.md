@@ -97,8 +97,8 @@ Built using:
 - MySQL
 
 <p align='middle'>
-  <img src='/supreme-cutz/images/Picture10.png' width='600'>
-  <img src='/supreme-cutz/images/Picture11.png' width='600'>
+  <img src='/supreme-cutz/images/Picture10.png' width='400'>
+  <img src='/supreme-cutz/images/Picture11.png' width='400'>
 </p>
 
 <p align='middle'>
@@ -181,17 +181,17 @@ Technologies used:
 #### Custom CSS Loader
 
 <p align='middle'>
-  <img src='/about-me/gif/custom-loader.gif' width='400'>
+  <img src='/about-me/gif/custom-loader.gif' width='600'>
 </p>
 
 #### JavaScript "mouseover" events with Custom CSS hover animation
 
 <p align='middle'>
-  <img src='/about-me/gif/mouseover-events.gif' width='400'>
+  <img src='/about-me/gif/mouseover-events.gif' width='600'>
 </p>
 
 #### JavaScript "on-click" events with Custom CSS page transitions
 
 <p align='middle'>
-  <img src='/about-me/gif/page-transitions.gif' width='400'>
+  <img src='/about-me/gif/page-transitions.gif' width='600'>
 </p>
