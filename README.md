@@ -61,6 +61,20 @@ Built using:
 
 A Microsoft Access application created to handle scheduling and reservations of ICT labs by staff members at UTT. [Source code](/ict-lab-scheduler/)
 
+<p align='middle'>
+  <img src='/ict-lab-scheduler/images/calendar.gif' width='400'>
+</p>
+
+<p align='middle'>
+  <img src='/ict-lab-scheduler/images/Picture6.png' width='200'>
+  <img src='/ict-lab-scheduler/images/Picture8.png' width='200'>
+</p>
+
+<p align='middle'>
+  <img src='/ict-lab-scheduler/images/Picture10.png' width='200'>
+  <img src='/ict-lab-scheduler/images/Picture14.png' width='200'>
+</p>
+
 ### Supreme Cutz
 
 A web application designed for a local barbershop, that handles customer appointments and sells hair care products. [Source code](/supreme-cutz/)<br>
