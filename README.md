@@ -41,7 +41,7 @@ Technologies used:
 
 ### Caribay Management
 
-An inventory management application, designed for E-Commerce and Point-of-Sale systems. [Source code](/caribay-management/)
+An inventory management application, created for E-Commerce and Point-of-Sale systems. [Source code](/caribay-management/)
 <br>
 Built using:
 
@@ -87,7 +87,7 @@ A Microsoft Access application created to handle scheduling and reservations of 
 
 ### Supreme Cutz
 
-A web application designed for a local barbershop, that handles customer appointments and sells hair care products. [Source code](/supreme-cutz/)<br>
+A web application created for a local barbershop, that handles customer appointments and sells hair care products. [Source code](/supreme-cutz/)<br>
 Built using:
 
 - Java EE (Apache Tomcat)
@@ -113,7 +113,7 @@ Built using:
 
 ### Premier Care
 
-A native Windows CRUD application designed for a local clinic, that handles patient records, appointments, treatment, prescriptions and invoicing. [Source code](/premier-care/)
+A native Windows CRUD application created for a local clinic, that handles patient records, appointments, treatment, prescriptions and invoicing. [Source code](/premier-care/)
 <br>
 Built using:
 
@@ -144,7 +144,7 @@ Built using:
 
 ### AutoServe
 
-A web application designed for a local auto-mechanic business. Featuring an administrative panel where staff can assign jobs to mechanics, view the status of jobs and prepare invoicing. [Source code](/autoserve/)
+A web application created for a local auto-mechanic business. Featuring an administrative panel where staff can assign jobs to mechanics, view the status of jobs and prepare invoicing. [Source code](/autoserve/)
 <br>
 Built using:
 
