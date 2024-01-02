@@ -115,7 +115,7 @@ Built using:
 - Microsoft SQL Server
 
 <p align='middle'>
-  <img src='/premier-care/images/ERD.jpg' width='500'>
+  <img src='/premier-care/images/ERD.jpg' width='800'>
 </p>
 
 <p align='middle'>
