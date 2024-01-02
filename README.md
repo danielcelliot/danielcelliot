@@ -181,17 +181,17 @@ Technologies used:
 #### Custom CSS Loader
 
 <p align='middle'>
-  <img src='/about-me/gif/custom-loader.gif' width='600'>
+  <img src='/about-me/gif/custom-loader.gif' width='650'>
 </p>
 
 #### JavaScript "mouseover" events with Custom CSS hover animation
 
 <p align='middle'>
-  <img src='/about-me/gif/mouseover-events.gif' width='600'>
+  <img src='/about-me/gif/mouseover-events.gif' width='650'>
 </p>
 
 #### JavaScript "on-click" events with Custom CSS page transitions
 
 <p align='middle'>
-  <img src='/about-me/gif/page-transitions.gif' width='600'>
+  <img src='/about-me/gif/page-transitions.gif' width='650'>
 </p>
