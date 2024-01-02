@@ -125,8 +125,11 @@ Built using:
 </p>
 
 <p align='middle'>
-  <img src='/premier-care/images/01. Login.jpg' width='350'>
-  <img src='/premier-care/images/03. Allergies.jpg' width='350'>
+  <img src='/premier-care/images/01. Login.jpg' width='500'>
+</p>
+
+<p align='middle'>
+  <img src='/premier-care/images/03. Allergies.jpg' width='200'>
 </p>
 
 ### AutoServe
