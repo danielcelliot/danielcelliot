@@ -120,13 +120,13 @@ Built using:
 </p>
 
 <p align='middle'>
-  <img src='/premier-care/images/05. Prescription.jpg' width='500'>
-  <img src='/premier-care/images/06. Invoice.jpg' width='500'>
+  <img src='/premier-care/images/05. Prescription.jpg' width='400'>
+  <img src='/premier-care/images/06. Invoice.jpg' width='400'>
 </p>
 
 <p align='middle'>
-  <img src='/premier-care/images/01. Login.jpg' width='600'>
-  <img src='/premier-care/images/03. Allergies.jpg' width='600'>
+  <img src='/premier-care/images/01. Login.jpg' width='350'>
+  <img src='/premier-care/images/03. Allergies.jpg' width='350'>
 </p>
 
 ### AutoServe
