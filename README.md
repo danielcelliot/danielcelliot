@@ -18,25 +18,25 @@ Technologies used:
 #### Storefront
 
 <p align='middle'>
-  <img src='/intuit-ecommerce/images/homepage.gif' width='300'>
-  <img src='/intuit-ecommerce/images/find-product.gif' width='300'>
+  <img src='/intuit-ecommerce/images/homepage.gif' width='250'>
+  <img src='/intuit-ecommerce/images/find-product.gif' width='250'>
 </p>
 
 <p align='middle'>
-  <img src='/intuit-ecommerce/images/shopping-bag.gif' width='300'>
-  <img src='/intuit-ecommerce/images/checkout.gif' width='300'>
+  <img src='/intuit-ecommerce/images/shopping-bag.gif' width='250'>
+  <img src='/intuit-ecommerce/images/checkout.gif' width='250'>
 </p>
 
 #### Seller Dashboard
 
 <p align='middle'>
-  <img src='/intuit-ecommerce/images/admin-dashboard.gif' width='300'>
-  <img src='/intuit-ecommerce/images/admin-fulfillment.gif' width='300'>
+  <img src='/intuit-ecommerce/images/admin-dashboard.gif' width='250'>
+  <img src='/intuit-ecommerce/images/admin-fulfillment.gif' width='250'>
 </p>
 
 <p align='middle'>
-  <img src='/intuit-ecommerce/images/admin-dashboard.gif' width='300'>
-  <img src='/intuit-ecommerce/images/admin-fulfillment.gif' width='300'>
+  <img src='/intuit-ecommerce/images/admin-dashboard.gif' width='250'>
+  <img src='/intuit-ecommerce/images/admin-fulfillment.gif' width='250'>
 </p>
 
 ### Caribay Management
