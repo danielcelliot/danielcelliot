@@ -76,7 +76,7 @@ A Microsoft Access application created to handle scheduling and reservations of 
 </p>
 
 <p align='middle'>
-  <img src='/ict-lab-scheduler/erd.png' width='600'>
+  <img src='/ict-lab-scheduler/erd.png' width='800'>
 </p>
 
 ### Supreme Cutz
@@ -115,10 +115,6 @@ Built using:
 - Microsoft SQL Server
 
 <p align='middle'>
-  <img src='/premier-care/images/ERD.jpg' width='800'>
-</p>
-
-<p align='middle'>
   <img src='/premier-care/images/02. Patient.jpg' width='400'>
   <img src='/premier-care/images/04. Appointment.jpg' width='400'>
 </p>
@@ -133,7 +129,11 @@ Built using:
 </p>
 
 <p align='middle'>
-  <img src='/premier-care/images/03. Allergies.jpg' width='200'>
+  <img src='/premier-care/images/03. Allergies.jpg' width='250'>
+</p>
+
+<p align='middle'>
+  <img src='/premier-care/images/ERD.jpg' width='800'>
 </p>
 
 ### AutoServe
@@ -147,6 +147,20 @@ Built using:
 - Bootstrap CSS
 - Javascript
 - MySQL
+
+<p align='middle'>
+  <img src='/autoserve/gif/01 Site navigation.gif' width='800'>
+</p>
+
+<p align='middle'>
+  <img src='/autoserve/gif/02 Services page - auto update totals .gif' width='400'>
+  <img src='/autoserve/gif/04 Clerk login - add new customer.gif' width='400'>
+</p>
+
+<p align='middle'>
+  <img src='/autoserve/gif/05 Clerk login - add new job.gif' width='400'>
+  <img src='/autoserve/gif/05 Clerk login - delete customer.gif' width='400'>
+</p>
 
 ### About Me
 
