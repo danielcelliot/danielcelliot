@@ -75,6 +75,10 @@ A Microsoft Access application created to handle scheduling and reservations of 
   <img src='/ict-lab-scheduler/images/Picture14.png' width='400'>
 </p>
 
+<p align='middle'>
+  <img src='/ict-lab-scheduler/erd.png' width='600'>
+</p>
+
 ### Supreme Cutz
 
 A web application designed for a local barbershop, that handles customer appointments and sells hair care products. [Source code](/supreme-cutz/)<br>
@@ -100,6 +104,7 @@ Built using:
   <img src='/supreme-cutz/images/Picture7.png' width='800'>
   <img src='/supreme-cutz/images/Picture6.png' width='600'>
 </p>
+
 ### Premier Care
 
 A native Windows CRUD application designed for a local clinic, that handles patient records, appointments, treatment, prescriptions and invoicing. [Source code](/premier-care/)
@@ -108,6 +113,21 @@ Built using:
 
 - .NET Framework with Windows Forms
 - Microsoft SQL Server
+
+<p align='middle'>
+  <img src='/premier-care/images/02. Patient.jpg' width='500'>
+  <img src='/premier-care/images/04. Appointment.jpg' width='500'>
+</p>
+
+<p align='middle'>
+  <img src='/premier-care/images/05. Prescription.jpg' width='500'>
+  <img src='/premier-care/images/06. Invoice.jpg' width='500'>
+</p>
+
+<p align='middle'>
+  <img src='/premier-care/images/01. Login.jpg' width='600'>
+  <img src='/premier-care/images/03. Allergies.jpg' width='600'>
+</p>
 
 ### AutoServe
 
