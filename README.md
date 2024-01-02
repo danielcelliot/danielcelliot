@@ -91,6 +91,15 @@ Built using:
   <img src='/supreme-cutz/images/Picture11.png' width='600'>
 </p>
 
+<p align='middle'>
+  <img src='/supreme-cutz/images/Picture8.png' width='800'>
+  <img src='/supreme-cutz/images/Picture5.png' width='800'>
+</p>
+
+<p align='middle'>
+  <img src='/supreme-cutz/images/Picture10.png' width='600'>
+  <img src='/supreme-cutz/images/Picture11.png' width='600'>
+</p>
 ### Premier Care
 
 A native Windows CRUD application designed for a local clinic, that handles patient records, appointments, treatment, prescriptions and invoicing. [Source code](/premier-care/)
