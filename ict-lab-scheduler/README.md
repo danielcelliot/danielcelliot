@@ -26,3 +26,5 @@ Technologies used:
 
 - [Microsoft Access](https://www.microsoft.com/en-us/microsoft-365/access)
 - [Visual Basic for Applications](https://en.wikipedia.org/wiki/Visual_Basic_for_Applications)
+
+Password for login: password
